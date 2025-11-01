@@ -19,7 +19,7 @@ jobs:
           ls -l packages
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3 gzip ar
+        run: sudo apt-get update && sudo apt-get install -y python3 gzip binutils
 
       - name: Diagnose ipk files
         run: |
