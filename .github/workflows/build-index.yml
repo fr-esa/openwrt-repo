@@ -25,9 +25,8 @@ jobs:
       - name: Build opkg-make-index
         working-directory: openwrt-src
         run: |
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
-          make tools/opkg/compile V=s
+          make defconfig
+          make tools/opkg/compile V=s -j$(nproc)
           cp bin/host/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
