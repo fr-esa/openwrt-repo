@@ -16,14 +16,19 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget make python3 gzip
+          sudo apt-get install -y git build-essential python3 gzip libncurses5-dev zlib1g-dev libssl-dev
 
-      - name: Download and install opkg-make-index from OpenWrt SDK 23.05.6
+      - name: Clone OpenWrt source
         run: |
-          wget https://downloads.openwrt.org/releases/23.05.6/targets/x86/64/openwrt-sdk-23.05.6-x86-64_gcc-11.4.0_musl.Linux-x86_64.tar.xz
-          tar -xf openwrt-sdk-23.05.6-x86-64_gcc-11.4.0_musl.Linux-x86_64.tar.xz
-          cd openwrt-sdk-23.05.6-x86-64_gcc-11.4.0_musl.Linux-x86_64
-          sudo cp staging_dir/host/bin/opkg-make-index /usr/local/bin/
+          git clone --depth=1 --branch=openwrt-24.10 https://github.com/openwrt/openwrt.git openwrt-src
+
+      - name: Build opkg-make-index
+        working-directory: openwrt-src
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make tools/opkg/compile V=s
+          cp bin/host/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
         working-directory: packages
