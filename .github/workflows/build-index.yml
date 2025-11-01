@@ -1,0 +1,42 @@
+name: Build OpenWrt Package Index
+
+on:
+  push:
+    paths:
+      - 'packages/*.ipk'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install opkg-utils
+        run: sudo apt-get update && sudo apt-get install -y opkg-utils
+
+      - name: Build Packages index
+        working-directory: packages
+        run: |
+          opkg-make-index . > Packages
+          gzip -k Packages
+
+      # (необязательно) если хочешь подписывать индекс
+      # - name: Import private key
+      #   run: |
+      #     echo "$PRIVATE_KEY" > private.key
+      #     chmod 600 private.key
+      #
+      # - name: Sign Packages.gz
+      #   working-directory: packages
+      #   run: |
+      #     opkg-sign-index --key ../private.key Packages.gz
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add packages/Packages*
+          git commit -m "Update package index" || echo "No changes"
+          git push
