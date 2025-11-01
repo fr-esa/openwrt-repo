@@ -32,17 +32,6 @@ jobs:
           opkg-make-index . > Packages
           gzip -k Packages
 
-      - name: Sign Packages.gz (optional)
-        if: secrets.PRIVATE_KEY != ''
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        working-directory: packages
-        run: |
-          echo "$PRIVATE_KEY" > private.key
-          chmod 600 private.key
-          opkg-sign-index --key private.key Packages.gz
-          rm private.key
-
       - name: Commit and push updated index
         run: |
           git config --global user.name "GitHub Actions"
