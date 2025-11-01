@@ -1,9 +1,9 @@
-name: Update OpenWrt Package Index
+name: Update OpenWrt Package Index with Debug
 
 on:
   push:
     branches:
-      - main  # или ваша ветка
+      - main
 
 jobs:
   build-index:
@@ -13,7 +13,17 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install Python3 and dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3 gzip binutils
+        run: sudo apt-get update && sudo apt-get install -y python3 gzip ar
+
+      - name: Show current directory and files
+        run: |
+          pwd
+          ls -l
+
+      - name: Check for ipk packages
+        run: |
+          echo "Found ipk files:"
+          ls -l *.ipk || echo "No ipk files found"
 
       - name: Create generate_packages.py script
         run: |
@@ -21,7 +31,6 @@ jobs:
           #!/usr/bin/env python3
           import os
           import sys
-          import gzip
           import hashlib
           import tarfile
           import subprocess
@@ -58,6 +67,8 @@ jobs:
 
           def main(directory):
               files = sorted(f for f in os.listdir(directory) if f.endswith(".ipk"))
+              if not files:
+                  print("No ipk files found")
               for f in files:
                   path = os.path.join(directory, f)
                   control = read_control_file(path)
@@ -75,6 +86,9 @@ jobs:
         run: |
           python3 generate_packages.py . > Packages
           gzip -f -9 Packages
+
+      - name: Show generated index files
+        run: ls -l Packages Packages.gz || echo "Packages files missing"
 
       - name: Generate Release file
         run: |
@@ -97,12 +111,21 @@ jobs:
             echo " $sha $size $filename" >> Release
           done
 
-      - name: Commit and push index files
+      - name: Show Release file
+        run: ls -l Release || echo "Release file missing"
+
+      - name: Commit and push index files if changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Packages Packages.gz Release
-          git commit -m "Update package index" || echo "No changes to commit"
-          git push
+
+          git add Packages Packages.gz Release || echo "Nothing to add"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update package index"
+            git push
+          fi
