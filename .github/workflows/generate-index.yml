@@ -27,7 +27,7 @@ jobs:
 
       - name: Patch opkg-make-index for sha256sum
         run: |
-          sed -i 's/sha256 /sha256sum /g' /tmp/opkg-tools/opkg-make-index
+          sed -i 's#sha256 #sha256sum #g' /tmp/opkg-tools/opkg-make-index
 
       - name: Generate Packages index in packages/
         run: |
