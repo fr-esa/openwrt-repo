@@ -21,21 +21,12 @@ jobs:
 
       - name: Install opkg-utils from OpenWrt source
         run: |
-          git clone https://git.openwrt.org/project/opkg-lede.git
-          cd opkg-lede/opkg-utils
+          git clone https://git.openwrt.org/project/opkg-utils.git
+          cd opkg-utils
           sudo make install
           opkg-make-index --help
 
       - name: Build Packages index
         working-directory: packages
         run: |
-          opkg-make-index . > Packages
-          gzip -k Packages
-
-      - name: Commit and push updated index
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes to commit"
-          git push
+          opk
