@@ -1,9 +1,9 @@
-name: Generate OpenWrt Package Index
+name: Update OpenWrt Package Index
 
 on:
   push:
     branches:
-      - main
+      - main  # или ваша ветка
 
 jobs:
   build-index:
@@ -12,18 +12,68 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Python3
-        run: sudo apt-get update && sudo apt-get install -y python3 python3-pip gzip
+      - name: Install Python3 and dependencies
+        run: sudo apt-get update && sudo apt-get install -y python3 gzip ar
 
-      - name: Download opkg-make-index.py
-        run: wget https://raw.githubusercontent.com/openwrt/packages/master/utils/opkg-make-index/opkg-make-index.py -O opkg-make-index.py
+      - name: Create generate_packages.py script
+        run: |
+          cat > generate_packages.py << 'EOF'
+          #!/usr/bin/env python3
+          import os
+          import sys
+          import gzip
+          import hashlib
+          import tarfile
+          import subprocess
 
-      - name: Make opkg-make-index.py executable
-        run: chmod +x opkg-make-index.py
+          def read_control_file(ipk_path):
+              with open(ipk_path, 'rb') as f:
+                  data = f.read()
+
+              import tempfile
+              with tempfile.TemporaryDirectory() as tmpdir:
+                  tmpipk = os.path.join(tmpdir, "pkg.ipk")
+                  with open(tmpipk, "wb") as tf:
+                      tf.write(data)
+                  subprocess.run(["ar", "x", tmpipk], cwd=tmpdir, check=True)
+                  control_tar = os.path.join(tmpdir, "control.tar.gz")
+                  if not os.path.exists(control_tar):
+                      control_tar = os.path.join(tmpdir, "control.tar")
+                  if control_tar.endswith(".gz"):
+                      with tarfile.open(control_tar, "r:gz") as tar:
+                          control_file = tar.extractfile("control")
+                          control_data = control_file.read().decode()
+                  else:
+                      with tarfile.open(control_tar, "r:") as tar:
+                          control_file = tar.extractfile("control")
+                          control_data = control_file.read().decode()
+                  return control_data
+
+          def sha256sum(filename):
+              h = hashlib.sha256()
+              with open(filename, "rb") as f:
+                  for chunk in iter(lambda: f.read(8192), b""):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          def main(directory):
+              files = sorted(f for f in os.listdir(directory) if f.endswith(".ipk"))
+              for f in files:
+                  path = os.path.join(directory, f)
+                  control = read_control_file(path)
+                  print(control.strip())
+                  print(f"Filename: {f}")
+                  print(f"SHA256: {sha256sum(path)}")
+                  print()
+
+          if __name__ == "__main__":
+              dirpath = sys.argv[1] if len(sys.argv) > 1 else "."
+              main(dirpath)
+          EOF
 
       - name: Generate Packages and Packages.gz
         run: |
-          ./opkg-make-index.py . > Packages
+          python3 generate_packages.py . > Packages
           gzip -f -9 Packages
 
       - name: Generate Release file
