@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y zstd zlib1g libssl1.1 liblzma5
+        run: sudo apt-get update && sudo apt-get install -y zstd zlib1g liblzma5
 
       - name: Download and extract OpenWrt SDK
         run: |
