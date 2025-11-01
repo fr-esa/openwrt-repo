@@ -11,22 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git make python3 gzip
+          sudo apt-get install -y wget make python3 gzip
 
-      - name: Install opkg-utils from OpenWrt source
+      - name: Download and install opkg-make-index from OpenWrt SDK
         run: |
-          git clone https://git.openwrt.org/project/opkg-utils.git
-          cd opkg-utils
-          sudo make install
-          opkg-make-index --help
+          wget https://downloads.openwrt.org/releases/23.05.4/targets/x86/64/openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64.tar.xz
+          tar -xf openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64.tar.xz
+          cd openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64
+          sudo cp staging_dir/host/bin/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
         working-directory: packages
         run: |
-          opk
+          opkg-make-index . > Packages
+          gzip -k Packages
+
+      - name: Commit and push updated index
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add packages/Packages*
+          git commit -m "Update package index" || echo "No changes to commit"
+          git push
