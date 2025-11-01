@@ -18,11 +18,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wget make python3 gzip
 
-      - name: Download and install opkg-make-index from OpenWrt SDK 24.10.4
+      - name: Download and install opkg-make-index from OpenWrt SDK 24.10.3
         run: |
-          wget https://downloads.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
-          tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
-          cd openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64
+          wget https://downloads.openwrt.org/releases/24.10.3/targets/x86/64/openwrt-sdk-24.10.3-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
+          tar -xf openwrt-sdk-24.10.3-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
+          cd openwrt-sdk-24.10.3-x86-64_gcc-13.2.1_musl.Linux-x86_64
           sudo cp staging_dir/host/bin/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
