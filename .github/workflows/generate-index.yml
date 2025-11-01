@@ -12,14 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install zstd
-        run: sudo apt-get update && sudo apt-get install -y zstd
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y zstd zlib1g libssl1.1 liblzma5
 
       - name: Download and extract OpenWrt SDK
         run: |
           wget https://downloads.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
           zstd -d openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
           tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar
+
+      - name: Check opkg-make-index presence and info
+        run: |
+          ls -l openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "File not found"
+          file openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "File info not available"
+          ldd openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "ldd info not available"
 
       - name: Generate Packages and Packages.gz
         run: |
