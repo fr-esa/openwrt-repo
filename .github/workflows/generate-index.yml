@@ -1,0 +1,57 @@
+name: Generate OpenWrt Package Index
+
+on:
+  push:
+    branches:
+      - main  # или master
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install opkg-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y opkg-utils gzip
+
+      - name: Generate Packages and Packages.gz
+        run: |
+          mkdir -p ./ipk
+          # На всякий случай удалим старые индексы
+          rm -f Packages Packages.gz Release
+          opkg-make-index ipk > Packages
+          gzip -f -9 Packages
+          
+      - name: Generate Release file
+        run: |
+          # Запишем базовую информацию в Release
+          echo "Origin: GitHub" > Release
+          echo "Label: OpenWrt Custom Repo" >> Release
+          echo "Suite: stable" >> Release
+          echo "Codename: 24.10.4" >> Release
+          echo "Version: 24.10.4" >> Release
+          echo "Architectures: all" >> Release
+          echo "Components: main" >> Release
+          echo "Description: Custom OpenWrt repo with ipk packages" >> Release
+          echo "" >> Release
+          echo "MD5Sum:" >> Release
+          md5sum Packages Packages.gz | while read md5 size filename; do
+            echo " $md5 $size $filename" >> Release
+          done
+          echo "" >> Release
+          echo "SHA256:" >> Release
+          sha256sum Packages Packages.gz | while read sha size filename; do
+            echo " $sha $size $filename" >> Release
+          done
+
+      - name: Commit and push index files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Packages Packages.gz Release
+          git commit -m "Update package index" || echo "No changes to commit"
+          git push
