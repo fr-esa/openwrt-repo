@@ -1,44 +1,45 @@
-name: Build OpenWrt Package Index
+name: Build Package Index
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:  # Позволяет запускать вручную
 
 jobs:
-  build-index:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3 gzip file
-
-      - name: List .ipk files info
         run: |
-          echo "Listing .ipk files and their types:"
-          ls -l packages/*.ipk || echo "No .ipk files found"
-          for f in packages/*.ipk; do
-            echo "File: $f"
-            file "$f"
+          sudo apt-get update
+          sudo apt-get install -y gzip
+
+      - name: Install opkg-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y opkg-utils
+
+      - name: Generate Packages index for each architecture
+        run: |
+          set -e
+          cd packages
+          for arch_dir in */; do
+            if [ -d "$arch_dir" ]; then
+              echo "Processing architecture: $arch_dir"
+              cd "$arch_dir"
+              rm -f Packages Packages.gz
+              opkg-make-index . > Packages
+              gzip -c Packages > Packages.gz
+              cd ..
+            fi
           done
 
-      - name: Generate Packages index
+      - name: Commit and push index files
         run: |
-          python3 generate_packages.py
-          gzip -f -9 packages/Packages
-
-      - name: Show generated index files
-        run: ls -l packages/Packages packages/Packages.gz || echo "Packages index files missing"
-
-      - name: Commit and push
-        env:
-          GITHUB_ACTOR: github-actions[bot]
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add packages/Packages.gz
-          git commit -m "Update package index" || echo "No changes to commit"
-          git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add packages/*/Packages*
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Packages index" && git push)
