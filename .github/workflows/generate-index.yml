@@ -1,4 +1,4 @@
-name: Update OpenWrt Package Index with Debug
+name: Update OpenWrt Package Index
 
 on:
   push:
@@ -12,18 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Python3 and dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3 gzip binutils
-
       - name: Show current directory and files
         run: |
           pwd
           ls -l
+          ls -l packages
 
-      - name: Check for ipk packages
-        run: |
-          echo "Found ipk files:"
-          ls -l *.ipk || echo "No ipk files found"
+      - name: Install Python3 and dependencies
+        run: sudo apt-get update && sudo apt-get install -y python3 gzip ar
 
       - name: Create generate_packages.py script
         run: |
@@ -38,7 +34,6 @@ jobs:
           def read_control_file(ipk_path):
               with open(ipk_path, 'rb') as f:
                   data = f.read()
-
               import tempfile
               with tempfile.TemporaryDirectory() as tmpdir:
                   tmpipk = os.path.join(tmpdir, "pkg.ipk")
@@ -67,8 +62,6 @@ jobs:
 
           def main(directory):
               files = sorted(f for f in os.listdir(directory) if f.endswith(".ipk"))
-              if not files:
-                  print("No ipk files found")
               for f in files:
                   path = os.path.join(directory, f)
                   control = read_control_file(path)
@@ -84,14 +77,15 @@ jobs:
 
       - name: Generate Packages and Packages.gz
         run: |
-          python3 generate_packages.py . > Packages
-          gzip -f -9 Packages
+          python3 generate_packages.py packages > packages/Packages
+          gzip -f -9 packages/Packages
 
       - name: Show generated index files
-        run: ls -l Packages Packages.gz || echo "Packages files missing"
+        run: ls -l packages/Packages*
 
       - name: Generate Release file
         run: |
+          cd packages
           echo "Origin: GitHub" > Release
           echo "Label: OpenWrt Custom Repo" >> Release
           echo "Suite: stable" >> Release
@@ -112,20 +106,16 @@ jobs:
           done
 
       - name: Show Release file
-        run: ls -l Release || echo "Release file missing"
+        run: cat packages/Release
 
-      - name: Commit and push index files if changed
+      - name: Commit and push index files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add Packages Packages.gz Release || echo "Nothing to add"
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Update package index"
-            git push
-          fi
+          git add packages/Packages packages/Packages.gz packages/Release
+          git status
+          git diff --staged || echo "No staged changes"
+          git commit -m "Update package index" || echo "No changes to commit"
+          git push
