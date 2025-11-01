@@ -1,40 +1,47 @@
-name: Update OpenWrt Package Index
+- name: Create generate_packages.py script
+  run: |
+    cat > generate_packages.py << 'EOF'
+    #!/usr/bin/env python3
+    import os
+    import sys
+    import tarfile
+    import hashlib
 
-on:
-  push:
-    branches:
-      - main
+    def read_control_file(tgz_path):
+        with tarfile.open(tgz_path, "r:gz") as tar:
+            try:
+                control_file = tar.extractfile("control")
+                if control_file is None:
+                    print(f"No control file in {tgz_path}", file=sys.stderr)
+                    sys.exit(1)
+                control_data = control_file.read().decode()
+                return control_data
+            except KeyError:
+                print(f"Control file not found in {tgz_path}", file=sys.stderr)
+                sys.exit(1)
 
-jobs:
-  build-index:
-    runs-on: ubuntu-latest
+    def sha256sum(filename):
+        h = hashlib.sha256()
+        with open(filename, "rb") as f:
+            for chunk in iter(lambda: f.read(8192), b""):
+                h.update(chunk)
+        return h.hexdigest()
 
-    steps:
-      - uses: actions/checkout@v3
+    def main(directory):
+        files = sorted(f for f in os.listdir(directory) if f.endswith(".ipk"))
+        if not files:
+            print(f"No .ipk files found in {directory}", file=sys.stderr)
+            sys.exit(1)
 
-      - name: Show current directory and files
-        run: |
-          pwd
-          ls -l
-          ls -l packages
+        for f in files:
+            path = os.path.join(directory, f)
+            control = read_control_file(path)
+            print(control.strip())
+            print(f"Filename: {f}")
+            print(f"SHA256: {sha256sum(path)}")
+            print()
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y python3 gzip binutils
-
-      - name: Diagnose ipk files
-        run: |
-          echo "Listing .ipk files and their types:"
-          ls -l packages/*.ipk || echo "No .ipk files found"
-          for f in packages/*.ipk; do
-            echo "File: $f"
-            file "$f"
-            ar t "$f" || echo "ar cannot read $f"
-          done
-
-      - name: Create generate_packages.py script
-        run: |
-          cat > generate_packages.py << 'EOF'
-          #!/usr/bin/env python3
-          import os
-          import sys
-          import has
+    if __name__ == "__main__":
+        dirpath = sys.argv[1] if len(sys.argv) > 1 else "."
+        main(dirpath)
+    EOF
