@@ -18,23 +18,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wget make python3 gzip
 
-      - name: Download and install opkg-make-index from OpenWrt SDK
+      - name: Download and install opkg-make-index from OpenWrt SDK 24.10.4
         run: |
-          wget https://downloads.openwrt.org/releases/23.05.4/targets/x86/64/openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64.tar.xz
-          tar -xf openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64.tar.xz
-          cd openwrt-sdk-23.05.4-x86-64_gcc-11.3.0_musl.Linux-x86_64
+          wget https://downloads.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
+          tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64.tar.xz
+          cd openwrt-sdk-24.10.4-x86-64_gcc-13.2.1_musl.Linux-x86_64
           sudo cp staging_dir/host/bin/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
         working-directory: packages
-        run: |
-          opkg-make-index . > Packages
-          gzip -k Packages
-
-      - name: Commit and push updated index
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes to commit"
-          git push
