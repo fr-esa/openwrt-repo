@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install zstd
+      - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y zstd
 
       - name: Download and extract OpenWrt SDK
@@ -21,10 +21,13 @@ jobs:
           zstd -d openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
           tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar
 
-      - name: Generate Packages and Packages.gz
+      - name: Generate package index in Alpine container
         run: |
-          ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/bin/opkg-make-index . > Packages
-          gzip -f -9 Packages
+          docker run --rm -v $PWD:/workdir -w /workdir alpine:latest sh -c "
+            apk add --no-cache gzip
+            ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/bin/opkg-make-index . > Packages &&
+            gzip -f -9 Packages
+          "
 
       - name: Generate Release file
         run: |
