@@ -26,7 +26,7 @@ jobs:
         working-directory: openwrt-src
         run: |
           make defconfig
-          make tools/opkg/compile V=s -j$(nproc)
+          make tools/compile V=s -j$(nproc)
           cp bin/host/opkg-make-index /usr/local/bin/
 
       - name: Build Packages index
