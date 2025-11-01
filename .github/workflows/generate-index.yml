@@ -3,32 +3,31 @@ name: Generate OpenWrt Package Index
 on:
   push:
     branches:
-      - main  # или master
+      - main
 
 jobs:
   build-index:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Install opkg-utils
+      - name: Install zstd
+        run: sudo apt-get update && sudo apt-get install -y zstd
+
+      - name: Download and extract OpenWrt SDK
         run: |
-          sudo apt-get update
-          sudo apt-get install -y opkg-utils gzip
+          wget https://downloads.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          zstd -d openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar
 
       - name: Generate Packages and Packages.gz
         run: |
-          mkdir -p ./ipk
-          # На всякий случай удалим старые индексы
-          rm -f Packages Packages.gz Release
-          opkg-make-index ipk > Packages
+          ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/bin/opkg-make-index . > Packages
           gzip -f -9 Packages
-          
+
       - name: Generate Release file
         run: |
-          # Запишем базовую информацию в Release
           echo "Origin: GitHub" > Release
           echo "Label: OpenWrt Custom Repo" >> Release
           echo "Suite: stable" >> Release
