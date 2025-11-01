@@ -12,25 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y zstd zlib1g liblzma5
+      - name: Install Python3
+        run: sudo apt-get update && sudo apt-get install -y python3 python3-pip gzip
 
-      - name: Download and extract OpenWrt SDK
-        run: |
-          wget https://downloads.openwrt.org/releases/24.10.4/targets/x86/64/openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
-          zstd -d openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
-          tar -xf openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar
+      - name: Download opkg-make-index.py
+        run: wget https://raw.githubusercontent.com/openwrt/packages/master/utils/opkg-make-index/opkg-make-index.py -O opkg-make-index.py
 
-      - name: Check opkg-make-index presence and info
-        run: |
-          ls -l openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "File not found"
-          file openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "File info not available"
-          ldd openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index || echo "ldd info not available"
+      - name: Make opkg-make-index.py executable
+        run: chmod +x opkg-make-index.py
 
       - name: Generate Packages and Packages.gz
         run: |
-          export LD_LIBRARY_PATH=./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/lib
-          ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index . > Packages
+          ./opkg-make-index.py . > Packages
           gzip -f -9 Packages
 
       - name: Generate Release file
