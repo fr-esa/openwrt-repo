@@ -1,12 +1,47 @@
+name: Generate GPG key and sign commits
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-and-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if GPG private key secret exists
+        id: check_key
+        run: |
+          if [ -z "${{ secrets.GPG_PRIVATE_KEY }}" ]; then
+            echo "private_key_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "private_key_exists=true" >> $GITHUB_OUTPUT
+          fi
+
+name: Generate GPG key and sign commits
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-and-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if GPG private key secret exists
+        id: check_key
+        run: |
+          if [ -z "${{ secrets.GPG_PRIVATE_KEY }}" ]; then
+            echo "private_key_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "private_key_exists=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: Generate GPG key if missing
         if: steps.check_key.outputs.private_key_exists == 'false'
         run: |
           cat >gen-key-script <<EOF
           %no-protection
-          Key-Type: RSA
+          Key-Type: default
           Key-Length: 2048
-          Subkey-Type: RSA
-          Subkey-Length: 2048
+          Subkey-Type: default
           Name-Real: GitHub Actions Bot
           Name-Email: actions@github.com
           Expire-Date: 0
@@ -14,13 +49,63 @@
           EOF
           gpg --batch --generate-key gen-key-script
 
+          # Экспорт приватного ключа в ASCII-armored
           gpg --armor --export-secret-keys > private.key
+          # Экспорт публичного ключа
           gpg --armor --export > public.key
 
           echo "=== PUBLIC KEY ==="
           cat public.key
           echo "=== END PUBLIC KEY ==="
 
+          # Выведи приватный ключ (для копирования и добавления в Secrets)
           echo "=== PRIVATE KEY ==="
           cat private.key
           echo "=== END PRIVATE KEY ==="
+
+      - name: Import GPG private key from secret
+        if: steps.check_key.outputs.private_key_exists == 'true'
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+
+      - name: Configure git to sign commits
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git config --global commit.gpgsign true
+          # Получаем ID ключа
+          KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -n1 | awk '{print $2}' | cut -d'/' -f2)
+          git config --global user.signingkey $KEY_ID
+
+      # Здесь можешь добавить шаги для подписания пакетов, коммитов и пуша
+
+      - name: Create signed commit example
+        run: |
+          echo "Signed commit at $(date)" >> README.md
+          git add README.md
+          git commit -S -m "Signed commit from GitHub Actions"
+          git push
+
+
+      - name: Import GPG private key from secret
+        if: steps.check_key.outputs.private_key_exists == 'true'
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+
+      - name: Configure git to sign commits
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git config --global commit.gpgsign true
+          # Получаем ID ключа
+          KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -n1 | awk '{print $2}' | cut -d'/' -f2)
+          git config --global user.signingkey $KEY_ID
+
+      # Здесь можешь добавить шаги для подписания пакетов, коммитов и пуша
+
+      - name: Create signed commit example
+        run: |
+          echo "Signed commit at $(date)" >> README.md
+          git add README.md
+          git commit -S -m "Signed commit from GitHub Actions"
+          git push
