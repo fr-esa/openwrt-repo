@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -15,7 +16,7 @@ jobs:
       - name: Install Perl and gzip
         run: |
           sudo apt-get update
-          sudo apt-get install -y perl gzip
+          sudo apt-get install -y perl gzip curl
 
       - name: Download opkg-make-index script from OpenWrt master
         run: |
@@ -24,24 +25,24 @@ jobs:
             -o /tmp/opkg-tools/opkg-make-index
           chmod +x /tmp/opkg-tools/opkg-make-index
 
-      - name: Generate Packages index for each architecture
+      - name: Generate Packages index in packages/
         run: |
-          set -e
           cd packages
-          for arch_dir in */; do
-            if [ -d "$arch_dir" ]; then
-              echo "Processing architecture: $arch_dir"
-              cd "$arch_dir"
-              rm -f Packages Packages.gz
-              /tmp/opkg-tools/opkg-make-index . > Packages
-              gzip -c Packages > Packages.gz
-              cd ..
-            fi
-          done
+          rm -f Packages Packages.gz
+          /tmp/opkg-tools/opkg-make-index . > Packages
+          gzip -c Packages > Packages.gz
+          ls -l Packages Packages.gz
 
       - name: Commit and push index files
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add packages/*/Packages*
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Packages index" && git push)
+          cd packages
+          git add Packages Packages.gz
+          # Проверяем есть ли изменения, чтобы не создавать пустой коммит
+          if ! git diff --quiet && ! git diff --staged --quiet; then
+            git commit -m "Auto-update Packages index"
+            git push origin main
+          else
+            echo "No changes detected"
+          fi
