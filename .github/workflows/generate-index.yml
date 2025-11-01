@@ -13,10 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Perl, gzip, curl
+      - name: Install Perl, gzip, curl and fix sha256 command
         run: |
           sudo apt-get update
           sudo apt-get install -y perl gzip curl
+          sudo ln -s /usr/bin/sha256sum /usr/local/bin/sha256 || true
 
       - name: Download opkg-make-index script from OpenWrt master
         run: |
@@ -24,10 +25,6 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/scripts/ipkg-make-index.sh \
             -o /tmp/opkg-tools/opkg-make-index
           chmod +x /tmp/opkg-tools/opkg-make-index
-
-      - name: Patch opkg-make-index for sha256sum
-        run: |
-          sed -i 's#sha256 #sha256sum #g' /tmp/opkg-tools/opkg-make-index
 
       - name: Generate Packages index in packages/
         run: |
