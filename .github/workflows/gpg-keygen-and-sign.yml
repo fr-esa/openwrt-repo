@@ -60,8 +60,11 @@ jobs:
           git config --global user.signingkey $KEY_ID
 
       - name: Make signed commit and push
+        env:
+          GIT_AUTH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
+          git remote set-url origin https://x-access-token:${GIT_AUTH_TOKEN}@github.com/${{ github.repository }}.git
           echo "Signed commit at $(date)" >> README.md
           git add README.md
           git commit -S -m "Signed commit from GitHub Actions"
-          git push
+          git push origin HEAD:main
