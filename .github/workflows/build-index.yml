@@ -9,25 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git build-essential python3 gzip libncurses5-dev zlib1g-dev libssl-dev
-
-      - name: Clone OpenWrt source
-        run: |
-          git clone --depth=1 --branch=openwrt-24.10 https://github.com/openwrt/openwrt.git openwrt-src
-
-      - name: Build opkg-make-index
-        working-directory: openwrt-src
-        run: |
-          make defconfig
-          make tools/compile V=s -j$(nproc)
-          cp bin/host/opkg-make-index /usr/local/bin/
+      - name: Install opkg-utils
+        run: sudo apt-get update && sudo apt-get install -y opkg-utils
 
       - name: Build Packages index
         working-directory: packages
@@ -35,10 +22,21 @@ jobs:
           opkg-make-index . > Packages
           gzip -k Packages
 
-      - name: Commit and push updated index
+      # (необязательно) если хочешь подписывать индекс
+      # - name: Import private key
+      #   run: |
+      #     echo "$PRIVATE_KEY" > private.key
+      #     chmod 600 private.key
+      #
+      # - name: Sign Packages.gz
+      #   working-directory: packages
+      #   run: |
+      #     opkg-sign-index --key ../private.key Packages.gz
+
+      - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes to commit"
+          git commit -m "Update package index" || echo "No changes"
           git push
