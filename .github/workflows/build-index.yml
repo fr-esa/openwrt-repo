@@ -9,12 +9,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install opkg-utils
-        run: sudo apt-get update && sudo apt-get install -y opkg-utils
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git make python3 gzip
+
+      - name: Install opkg-utils from OpenWrt source
+        run: |
+          git clone https://git.openwrt.org/project/opkg-lede.git
+          cd opkg-lede/opkg-utils
+          sudo make install
+          opkg-make-index --help
 
       - name: Build Packages index
         working-directory: packages
@@ -22,21 +32,21 @@ jobs:
           opkg-make-index . > Packages
           gzip -k Packages
 
-      # (необязательно) если хочешь подписывать индекс
-      # - name: Import private key
-      #   run: |
-      #     echo "$PRIVATE_KEY" > private.key
-      #     chmod 600 private.key
-      #
-      # - name: Sign Packages.gz
-      #   working-directory: packages
-      #   run: |
-      #     opkg-sign-index --key ../private.key Packages.gz
+      - name: Sign Packages.gz (optional)
+        if: secrets.PRIVATE_KEY != ''
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        working-directory: packages
+        run: |
+          echo "$PRIVATE_KEY" > private.key
+          chmod 600 private.key
+          opkg-sign-index --key private.key Packages.gz
+          rm private.key
 
-      - name: Commit and push changes
+      - name: Commit and push updated index
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes"
+          git commit -m "Update package index" || echo "No changes to commit"
           git push
