@@ -23,15 +23,15 @@ jobs:
           gzip -k Packages
 
       # (необязательно) если хочешь подписывать индекс
-      # - name: Import private key
-      #   run: |
-      #     echo "$PRIVATE_KEY" > private.key
-      #     chmod 600 private.key
-      #
-      # - name: Sign Packages.gz
-      #   working-directory: packages
-      #   run: |
-      #     opkg-sign-index --key ../private.key Packages.gz
+     - name: Import private key
+       run: |
+         echo "$PRIVATE_KEY" > private.key
+         chmod 600 private.key
+    
+     - name: Sign Packages.gz
+       working-directory: packages
+       run: |
+         opkg-sign-index --key ../private.key Packages.gz
 
       - name: Commit and push changes
         run: |
