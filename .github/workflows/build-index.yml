@@ -13,8 +13,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install opkg-utils
-        run: sudo apt-get update && sudo apt-get install -y opkg-utils
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip gzip git
+
+      - name: Download opkg-utils
+        run: |
+          git clone --depth 1 https://github.com/openwrt/opkg.git opkg-src
+          sudo cp opkg-src/utils/opkg-make-index opkg-src/utils/opkg-sign-index /usr/local/bin/
+          sudo chmod +x /usr/local/bin/opkg-make-index /usr/local/bin/opkg-sign-index
 
       - name: Build Packages index
         working-directory: packages
@@ -22,21 +30,6 @@ jobs:
           opkg-make-index . > Packages
           gzip -k Packages
 
-      # (необязательно) если хочешь подписывать индекс
+      # (если нужна подпись, раскомментируй и настрой ниже)
       # - name: Import private key
       #   run: |
-      #     echo "$PRIVATE_KEY" > private.key
-      #     chmod 600 private.key
-      #
-      # - name: Sign Packages.gz
-      #   working-directory: packages
-      #   run: |
-      #     opkg-sign-index --key ../private.key Packages.gz
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes"
-          git push
