@@ -24,7 +24,7 @@ jobs:
       - name: Generate Packages and Packages.gz
         run: |
           export LD_LIBRARY_PATH=./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/lib
-          ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/staging_dir/host/bin/opkg-make-index . > Packages
+          ./openwrt-sdk-24.10.4-x86-64_gcc-13.3.0_musl.Linux-x86_64/bin/host/opkg-make-index . > Packages
           gzip -f -9 Packages
 
       - name: Generate Release file
@@ -49,6 +49,8 @@ jobs:
           done
 
       - name: Commit and push index files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
