@@ -24,30 +24,9 @@ jobs:
             file "$f"
           done
 
-      - name: Generate simple Packages index (filenames, size, sha256)
+      - name: Generate Packages index
         run: |
-          python3 -c "
-import os, sys, hashlib
-
-dirpath = 'packages'
-files = sorted(f for f in os.listdir(dirpath) if f.endswith('.ipk'))
-
-if not files:
-    print('No .ipk files found', file=sys.stderr)
-    sys.exit(1)
-
-with open('packages/Packages', 'w') as out:
-    for f in files:
-        path = os.path.join(dirpath, f)
-        size = os.path.getsize(path)
-        with open(path, 'rb') as fileobj:
-            h = hashlib.sha256()
-            while chunk := fileobj.read(8192):
-                h.update(chunk)
-        out.write(f'Package: {f}\n')
-        out.write(f'Size: {size}\n')
-        out.write(f'SHA256: {h.hexdigest()}\n\n')
-"
+          python3 generate_packages.py
           gzip -f -9 packages/Packages
 
       - name: Show generated index files
@@ -60,6 +39,6 @@ with open('packages/Packages', 'w') as out:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add packages/Packages.gz || echo "Nothing to add"
+          git add packages/Packages.gz
           git commit -m "Update package index" || echo "No changes to commit"
           git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
