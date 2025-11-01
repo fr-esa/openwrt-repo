@@ -3,7 +3,7 @@ name: Build Package Index
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:  # Позволяет запускать вручную
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,15 +12,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install Perl and gzip
         run: |
           sudo apt-get update
-          sudo apt-get install -y gzip
+          sudo apt-get install -y perl gzip
 
-      - name: Install opkg-utils
+      - name: Download opkg-make-index script from OpenWrt master
         run: |
-          sudo apt-get update
-          sudo apt-get install -y opkg-utils
+          mkdir -p /tmp/opkg-tools
+          curl -fsSL https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/scripts/ipkg-make-index.sh \
+            -o /tmp/opkg-tools/opkg-make-index
+          chmod +x /tmp/opkg-tools/opkg-make-index
 
       - name: Generate Packages index for each architecture
         run: |
@@ -31,7 +33,7 @@ jobs:
               echo "Processing architecture: $arch_dir"
               cd "$arch_dir"
               rm -f Packages Packages.gz
-              opkg-make-index . > Packages
+              /tmp/opkg-tools/opkg-make-index . > Packages
               gzip -c Packages > Packages.gz
               cd ..
             fi
