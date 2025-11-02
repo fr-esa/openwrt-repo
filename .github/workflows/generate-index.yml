@@ -15,19 +15,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Import GPG key
+      - name: Import GPG private key
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-          echo "Imported keys:"
-          gpg --list-secret-keys --keyid-format=long
-          # Сохраняем fingerprint для использования при подписи
-          FINGERPRINT=$(gpg --list-secret-keys --keyid-format=long | grep -Eo '[A-F0-9]{40}' | head -n1)
-          echo "FINGERPRINT=$FINGERPRINT" >> $GITHUB_ENV
+          echo "Listing imported keys:"
+          gpg --list-secret-keys --keyid-format LONG
+          # Сохраняем ID первого ключа
+          KEYID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2 | head -n1)
+          echo "KEYID=$KEYID" >> $GITHUB_ENV
+          echo "Using key ID: $KEYID"
 
       - name: Build Packages index
         run: |
@@ -46,16 +47,16 @@ jobs:
           gzip -9c Packages > Packages.gz
           cp Packages Packages.manifest
 
-      - name: Sign Packages index
+      - name: Sign Packages index (detached ASCII signature)
         env:
-          FINGERPRINT: ${{ env.FINGERPRINT }}
+          KEYID: ${{ env.KEYID }}
         run: |
           cd packages
-          # --batch и --yes отключают интерактивность, --local-user указывает явный ключ
-          gpg --batch --yes --pinentry-mode loopback --local-user "$FINGERPRINT" --detach-sign --armor -o Packages.sig Packages
-          echo "Signature created with key $FINGERPRINT"
+          echo "Signing Packages with key ID: $KEYID"
+          gpg --batch --yes --pinentry-mode loopback --default-key "$KEYID" \
+              --detach-sign --armor -o Packages.sig Packages
 
-      - name: Commit and push
+      - name: Commit and push index and signature
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
