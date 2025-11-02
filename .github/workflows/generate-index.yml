@@ -2,46 +2,26 @@ name: Generate OpenWrt Package Index
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'packages/**'
 
 jobs:
   build-index:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - run: sudo apt-get update && sudo apt-get install -y opkg-utils gzip
-
-      - run: |
-          rm -f Packages Packages.gz Release
-          opkg-make-index . > Packages
-          gzip -f -9 Packages
-
-      - run: |
-          echo "Origin: GitHub" > Release
-          echo "Label: OpenWrt Custom Repo" >> Release
-          echo "Suite: stable" >> Release
-          echo "Codename: 24.10.4" >> Release
-          echo "Version: 24.10.4" >> Release
-          echo "Architectures: all" >> Release
-          echo "Components: main" >> Release
-          echo "Description: Custom OpenWrt repo with ipk packages" >> Release
-          echo "" >> Release
-          echo "MD5Sum:" >> Release
-          md5sum Packages Packages.gz | while read md5 size filename; do
-            echo " $md5 $size $filename" >> Release
-          done
-          echo "" >> Release
-          echo "SHA256:" >> Release
-          sha256sum Packages Packages.gz | while read sha size filename; do
-            echo " $sha $size $filename" >> Release
-          done
-
-      - run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Packages Packages.gz Release
-          git commit -m "Update package index" || echo "No changes to commit"
-          git push
+    - name: Run opkg-make-index in Docker
+      run: |
+        docker run --rm -v $PWD/packages:/packages openwrtorg/sdk:24.10.4 /bin/sh -c "
+          opkg-make-index /packages > /packages/Packages && gzip -f -k /packages/Packages
+        "
+      
+    - name: Commit Packages index
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add packages/Packages packages/Packages.gz
+        git commit -m "Update Packages index" || echo "No changes"
+        git push
