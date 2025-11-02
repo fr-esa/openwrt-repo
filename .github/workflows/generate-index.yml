@@ -60,6 +60,7 @@ jobs:
           cd packages
           cat usign.key
           usign -S -m Packages.gz -s usign.key -x Packages.sig
+          usign -S -m Packages -s usign.key -x Packages.sig
 
       - name: Commit and push index and signature
         env:
