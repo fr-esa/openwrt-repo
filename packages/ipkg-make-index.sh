@@ -17,7 +17,7 @@ for pkg in "$pkg_dir"/*.ipk; do
   
   tempdir=$(mktemp -d)
   
-  # Распаковываем .ipk как gzip-архив (внутри должны быть control.tar.gz и data.tar.gz)
+  # Распаковываем .ipk
   tar -xzf "$pkg" -C "$tempdir"
   
   if [ ! -f "$tempdir/control.tar.gz" ]; then
@@ -29,11 +29,8 @@ for pkg in "$pkg_dir"/*.ipk; do
   file_size=$(stat -L -c%s "$pkg")
   sha256sum=$(sha256sum "$pkg" | cut -d' ' -f1)
   
-  # Извлекаем файл control из control.tar.gz и заменяем Description, добавляем метаданные
-  tar -Oxzf "$tempdir/control.tar.gz" ./control | sed -e "s/^Description:/Filename: ${pkg##*/}\
-Size: $file_size\
-SHA256sum: $sha256sum\
-Description:/"
+  # Вот ключевая часть: добавляем Filename, Size, SHA256sum перед Description, с корректными переносами строк
+  tar -Oxzf "$tempdir/control.tar.gz" ./control | sed -e "1iFilename: ${pkg##*/}\nSize: $file_size\nSHA256sum: $sha256sum" 
   
   echo
   
