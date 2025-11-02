@@ -45,7 +45,7 @@ jobs:
           head -c 20 packages/*.ipk | xxd
           chmod +x ipkg-make-index.sh
           ./ipkg-make-index.sh . > Packages
-          gzip -9c Packages > Packages.gz
+          gzip -9n Packages > Packages.gz
           
       - name: Setup usign private key
         env:
