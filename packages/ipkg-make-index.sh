@@ -21,15 +21,13 @@ for pkg in $(find "$pkg_dir" -name '*.ipk' | sort); do
     file_size=$(stat -L -c%s "$pkg")
     sha256sum=$(sha256sum "$pkg" | cut -d ' ' -f1)
 
-    # Экранируем слеши для sed (используем разделитель |)
     sed_safe_pkg=$(echo "$pkg" | sed 's/^\.\///; s/\//\\\//g')
 
-    # Временная директория для распаковки
     tmpdir=$(mktemp -d)
     trap "rm -rf $tmpdir" EXIT
 
-    # Распаковываем ipk (ar архив)
-    ar x "$pkg" -C "$tmpdir"
+    # Извлекаем ar-архив в tmpdir
+    (cd "$tmpdir" && ar x "$OLDPWD/$pkg")
 
     # Распаковываем control.tar.gz и выводим control с нужными заменами
     tar -xzf "$tmpdir/control.tar.gz" -C "$tmpdir"
