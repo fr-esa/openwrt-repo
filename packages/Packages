@@ -1,9 +1,123 @@
+Package: internet-detector-mod-telegram
+Version: 1.6.6-r1
+Depends: libc, internet-detector, curl
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector-mod-telegram
+SourceName: internet-detector-mod-telegram
+Section: net
+SourceDateEpoch: 1758829133
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 20480
+Filename: internet-detector-mod-telegram_1.6.6-r1_all.ipkSize: : :  Telegram messenger support for internet-detector.
 
+Package: internet-detector
+Version: 1.6.6-r1
+Depends: libc, lua, luaposix, libuci-lua
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector
+SourceName: internet-detector
+Section: net
+SourceDateEpoch: 1758829133
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 81920
+Filename: internet-detector_1.6.6-r1_all.ipkSize: : :  Internet-detector is a small daemon
+ for checking Internet availability.
+ Written in Lua using the luaposix library.
 
+Package: luci-app-cpu-perf
+Version: 0.4.1-r1
+Depends: libc, lua, luci-lib-nixio, luci-lib-jsonc
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-cpu-perf/_GitHub/luci-app-cpu-perf
+SourceName: luci-app-cpu-perf
+License: MIT
+Section: luci
+SourceDateEpoch: 1733238727
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-cpu-perf_0.4.1-r1_all.ipkSize: : :  CPU performance information and management for LuCI
 
+Package: luci-app-internet-detector
+Version: 1.6.6-r2
+Depends: libc, internet-detector
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/luci-app-internet-detector
+SourceName: luci-app-internet-detector
+Section: luci
+SourceDateEpoch: 1759418626
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 61440
+Filename: luci-app-internet-detector_1.6.6-r2_all.ipkSize: : :  LuCI support for internet-detector
 
+Package: luci-app-temp-status
+Version: 0.7.1-r1
+Depends: libc, ucode, ucode-mod-fs
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-temp-status/_GitHub/luci-app-temp-status
+SourceName: luci-app-temp-status
+License: MIT
+Section: luci
+SourceDateEpoch: 1751906185
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-temp-status_0.7.1-r1_all.ipkSize: : :  Temperature sensors data for the LuCI status page
 
+Package: luci-app-zapret
+Version: 72.20251022-r1
+Depends: libc, zapret
+Source: feeds/base/zapret-openwrt/luci-app-zapret
+SourceName: luci-app-zapret
+License: MIT
+Section: luci
+SourceDateEpoch: 1761135329
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 81920
+Filename: luci-app-zapret_72.20251022-r1_all.ipkSize: : :  LuCI support for zapret
 
+Package: luci-theme-argon
+Version: 2.3.2-r20250207
+Depends: libc, curl, jsonfilter, luci-lua-runtime
+Source: feeds/base/downloads/luci-theme-argon
+SourceName: luci-theme-argon
+Section: luci
+SourceDateEpoch: 1739087731
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 768000
+Filename: luci-theme-argon_2.3.2-r20250207_all.ipkSize: : :  Argon Theme
 
+Package: vlmcsd
+Version: svn1113-1
+Depends: libc, libpthread
+Source: package/vlmcsd
+License: MIT
+LicenseFiles: LICENSE
+Section: net
+Maintainer: HotBird64
+Architecture: x86_64
+Installed-Size: 57903
+Filename: vlmcsd_svn1113-1_x86_64.ipkSize: : :  vlmcsd is a KMS Emulator in C.
 
+Package: zapret
+Version: 72.20251022
+Depends: libc, nftables, curl, gzip, coreutils, coreutils-sort, coreutils-sleep, kmod-nft-nat, kmod-nft-offload, kmod-nft-queue, libnetfilter-queue1, libcap, zlib
+Source: feeds/base/zapret-openwrt/zapret
+SourceName: zapret
+License: MIT
+LicenseFiles: docs/LICENSE.txt
+Section: net
+SourceDateEpoch: 1761135329
+URL: https://github.com/bol-van/zapret
+Maintainer: bol-van
+Architecture: x86_64
+Installed-Size: 501760
+Filename: zapret_72.20251022_x86_64.ipkSize: : :  zapret
 
