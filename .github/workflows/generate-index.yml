@@ -37,7 +37,8 @@ jobs:
         env:
           USIGN_KEY: ${{ secrets.USIGN_KEY }}
         run: |
-          echo "$USIGN_KEY" | base64 -d > packages/Packages.sig
+          echo "$USIGN_KEY" 
+          #| base64 -d > packages/Packages.sig
           chmod 600 packages/Packages.sig
 
       - name: Build Packages index
