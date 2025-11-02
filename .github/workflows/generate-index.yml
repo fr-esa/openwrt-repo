@@ -26,20 +26,23 @@ jobs:
             -o /tmp/opkg-tools/opkg-make-index
           chmod +x /tmp/opkg-tools/opkg-make-index
 
-      - name: Generate Packages index in packages/
+      - name: Generate Packages index in packages/ (with debug)
         run: |
           cd packages
-          rm -f Packages Packages.gz
-          /tmp/opkg-tools/opkg-make-index . > Packages
+          rm -f Packages Packages.gz debug.log
+          # Запускаем с подробным выводом, чтобы не падать сразу при ошибке
+          bash -x /tmp/opkg-tools/opkg-make-index . > Packages 2> debug.log || echo "Warning: opkg-make-index failed, see debug.log"
           gzip -c Packages > Packages.gz
-          ls -l Packages Packages.gz
+          ls -l Packages Packages.gz debug.log
+          # Покажем первые 50 строк лога, чтобы можно было видеть ошибки
+          head -50 debug.log
 
       - name: Commit and push index files
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           cd packages
-          git add Packages Packages.gz
+          git add Packages Packages.gz || true
           if ! git diff --quiet && ! git diff --staged --quiet; then
             git commit -m "Auto-update Packages index"
             git push origin main
