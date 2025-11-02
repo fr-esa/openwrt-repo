@@ -51,12 +51,12 @@ jobs:
         run: |
           cd packages
           echo "$USIGN_PRIV_B64" | base64 -d > usign.key
-          cat usign.key
           chmod 600 usign.key
           
       - name: Sign Packages.gz index with usign
         run: |
           cd packages
+          cat usign.key
           usign -S -m Packages.gz -s usign.key -x Packages.sig
 
       - name: Commit and push index and signature
