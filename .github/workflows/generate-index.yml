@@ -33,6 +33,7 @@ jobs:
           cd packages
           ls -la
           rm -f Packages Packages.gz Packages.manifest Packages.sig
+          ls -la
           for f in *.ipk; do
             echo "Generating entry for $f"
             tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
