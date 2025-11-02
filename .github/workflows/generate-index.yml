@@ -1,51 +1,47 @@
-name: Build Package Index
+name: Generate OpenWrt Package Index
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-index:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Install Perl, gzip, curl and fix sha256 command
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y perl gzip curl
-          sudo ln -s /usr/bin/sha256sum /usr/local/bin/sha256 || true
+      - run: sudo apt-get update && sudo apt-get install -y opkg-utils gzip
 
-      - name: Download opkg-make-index script from OpenWrt master
-        run: |
-          mkdir -p /tmp/opkg-tools
-          curl -fsSL https://raw.githubusercontent.com/openwrt/openwrt/refs/heads/main/scripts/ipkg-make-index.sh \
-            -o /tmp/opkg-tools/opkg-make-index
-          chmod +x /tmp/opkg-tools/opkg-make-index
+      - run: |
+          rm -f Packages Packages.gz Release
+          opkg-make-index . > Packages
+          gzip -f -9 Packages
 
-      - name: Generate Packages index in packages/ (with debug)
-        run: |
-          cd packages
-          rm -f Packages Packages.gz debug.log
-          # Запускаем с подробным выводом, чтобы не падать сразу при ошибке
-          bash -x /tmp/opkg-tools/opkg-make-index . > Packages 2> debug.log || echo "Warning: opkg-make-index failed, see debug.log"
-          gzip -c Packages > Packages.gz
-          ls -l Packages Packages.gz debug.log
-          # Покажем первые 50 строк лога, чтобы можно было видеть ошибки
-          head -50 debug.log
+      - run: |
+          echo "Origin: GitHub" > Release
+          echo "Label: OpenWrt Custom Repo" >> Release
+          echo "Suite: stable" >> Release
+          echo "Codename: 24.10.4" >> Release
+          echo "Version: 24.10.4" >> Release
+          echo "Architectures: all" >> Release
+          echo "Components: main" >> Release
+          echo "Description: Custom OpenWrt repo with ipk packages" >> Release
+          echo "" >> Release
+          echo "MD5Sum:" >> Release
+          md5sum Packages Packages.gz | while read md5 size filename; do
+            echo " $md5 $size $filename" >> Release
+          done
+          echo "" >> Release
+          echo "SHA256:" >> Release
+          sha256sum Packages Packages.gz | while read sha size filename; do
+            echo " $sha $size $filename" >> Release
+          done
 
-      - name: Commit and push index files
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          cd packages
-          git add Packages Packages.gz || true
-          if ! git diff --quiet && ! git diff --staged --quiet; then
-            git commit -m "Auto-update Packages index"
-            git push origin main
-          else
-            echo "No changes detected"
-          fi
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Packages Packages.gz Release
+          git commit -m "Update package index" || echo "No changes to commit"
+          git push
