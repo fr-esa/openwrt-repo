@@ -41,9 +41,8 @@ jobs:
         run: |
           cd packages
           rm -f Packages Packages.gz Packages.sig
-          curl -sO https://raw.githubusercontent.com/openwrt/openwrt/master/scripts/ipkg-make-index.sh
           chmod +x ipkg-make-index.sh
-          ./ipkg-make-index.sh . > Packages
+          ipkg-make-index.sh . > Packages
           gzip -9c Packages > Packages.gz
           
       - name: Setup usign private key
