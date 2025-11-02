@@ -18,10 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install usign
+      - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y usign
+          sudo apt-get install -y build-essential git
+
+      - name: Build usign from source
+        run: |
+          git clone https://github.com/openwrt/usign.git
+          cd usign
+          make
+          sudo cp usign /usr/local/bin/
 
       - name: Prepare usign private key
         env:
