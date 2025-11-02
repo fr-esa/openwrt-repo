@@ -30,8 +30,8 @@ jobs:
 
       - name: Build Packages index
         run: |
-          cd packages
           rm packages/Packages packages/Packages.*
+          cd packages
           for f in *.ipk; do
             echo "Generating entry for $f"
             tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
