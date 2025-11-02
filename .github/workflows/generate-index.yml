@@ -26,7 +26,7 @@ jobs:
           cd build
           cmake ..
           make
-          sudo make install
+          make install
 
       - name: Setup usign private key
         env:
@@ -55,7 +55,7 @@ jobs:
       - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          ./../../usign/build/usign -S -s ../usign.key -m Packages.gz -x Packages.sig
+          usign -S -s usign.key -m Packages.gz -x Packages.sig
 
       - name: Commit and push index and signature
         env:
