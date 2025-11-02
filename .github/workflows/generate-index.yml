@@ -28,13 +28,6 @@ jobs:
           make
           make install
 
-      - name: Setup usign private key
-        env:
-          USIGN_KEY: ${{ secrets.USIGN_KEY }}
-        run: |
-          echo "$USIGN_KEY" > usign.key
-          chmod 600 usign.key
-
       - name: Build Packages index
         run: |
           cd packages
@@ -55,7 +48,7 @@ jobs:
       - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          usign -S -s usign.key -m Packages.gz -x Packages.sig
+          usign -S -s Packages.sig -m Packages.gz
 
       - name: Commit and push index and signature
         env:
