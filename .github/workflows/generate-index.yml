@@ -49,12 +49,11 @@ jobs:
       - name: Sign Packages.gz index (detached ASCII signature)
         env:
           KEYID: ${{ env.KEYID }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           cd packages
           echo "Signing Packages.gz with key ID: $KEYID"
-          gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" --default-key "$KEYID" \
-              --detach-sign --armor -o Packages.sig Packages.gz
+          gpg --batch --yes --pinentry-mode loopback --default-key "$KEYID" \
+              --detach-sign --armor -o Packages.gz.sig Packages.gz
 
       - name: Commit and push index and signature
         env:
