@@ -52,6 +52,9 @@ jobs:
         run: |
           cd packages
           echo "Signing Packages.gz with key ID: $KEYID"
+          ls -l Packages.sig
+          file Packages.sig
+          head -c 100 Packages.sig | xxd
           gpg --batch --yes --pinentry-mode loopback --default-key "$KEYID" \
               --detach-sign -o Packages.sig Packages.gz
 
