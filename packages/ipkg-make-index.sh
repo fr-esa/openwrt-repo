@@ -23,8 +23,9 @@ for pkg in $(find "$pkg_dir" -name '*.ipk' | sort); do
 
     sed_safe_pkg=$(echo "$pkg" | sed 's/^\.\///; s/\//\\\//g')
 
-    # Распаковываем control напрямую из .ipk (tar.gz)
-    tar -xOzf "$pkg" control | \
+    # Извлечь control.tar.gz из ar-архива, затем из control.tar.gz извлечь файл control
+    # Используем 'ar p' чтобы вывести control.tar.gz на stdout, потом распаковать и получить control
+    ar p "$pkg" control.tar.gz | tar -Oxzf - control | \
     sed -e "s|^Description:|Filename: $sed_safe_pkg\nSize: $file_size\nSHA256sum: $sha256sum\nDescription:|"
 
     echo ""
