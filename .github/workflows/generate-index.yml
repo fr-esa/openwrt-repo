@@ -43,7 +43,8 @@ jobs:
       - name: Build Packages index
         run: |
           cd packages
-          rm -f Packages Packages.gz Packages.manifest Packages.sig
+          rm -f Packages Packages.gz Packages.manifest 
+          #Packages.sig
           for f in *.ipk; do
             echo "Generating entry for $f"
             tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
