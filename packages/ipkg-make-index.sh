@@ -12,23 +12,32 @@ empty=1
 
 for pkg in $(find "$pkg_dir" -name '*.ipk' | sort); do
     empty=
+
     name="${pkg##*/}"
     name="${name%%_*}"
     [[ "$name" == "kernel" ]] && continue
     [[ "$name" == "libc" ]] && continue
+
     echo "Generating index for package $pkg" >&2
 
     file_size=$(stat -L -c%s "$pkg")
     sha256sum=$(sha256sum "$pkg" | cut -d ' ' -f1)
 
-    # Экранируем слеши для sed (используем разделитель |)
+    # Экранирование слешей для sed (используем разделитель |)
     sed_safe_pkg=$(echo "$pkg" | sed 's/^\.\///; s/\//\\\//g')
 
-    # Распаковываем control и вставляем нужные поля
-    tar -Oxzf "$pkg" control.tar.gz | tar -xOzf - control | \
-    sed -e "s|^Description:|Filename: $sed_safe_pkg\nSize: $file_size\nSHA256sum: $sha256sum\nDescription:|"
+    # Временный файл для извлечения control.tar.gz
+    tmpfile=$(mktemp)
+
+    # Извлекаем control.tar.gz из ipk в tmpfile
+    tar -Oxzf "$pkg" control.tar.gz > "$tmpfile"
+
+    # Извлекаем файл control из control.tar.gz и вставляем метаданные
+    tar -xOzf "$tmpfile" control | sed -e "s|^Description:|Filename: $sed_safe_pkg\nSize: $file_size\nSHA256sum: $sha256sum\nDescription:|"
 
     echo ""
+
+    rm "$tmpfile"
 done
 
 [ -n "$empty" ] && echo
