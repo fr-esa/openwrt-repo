@@ -18,14 +18,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install sha256sum (coreutils)
+      - name: Install coreutils (sha256sum)
         run: |
           sudo apt-get update
           sudo apt-get install -y coreutils
 
       - name: Fix sha256 command
         run: |
-          sudo ln -s $(which sha256sum) /usr/local/bin/sha256
+          sudo ln -sf $(which sha256sum) /usr/local/bin/sha256
 
       - name: Build usign from source
         run: |
@@ -42,7 +42,6 @@ jobs:
           cd packages
           rm -f Packages Packages.gz Packages.sig
 
-          # Создаём скрипт ipkg-make-index.sh
           cat > ipkg-make-index.sh <<'EOF'
 #!/usr/bin/env bash
 set -e
@@ -83,7 +82,6 @@ exit 0
 EOF
 
           chmod +x ipkg-make-index.sh
-
           ./ipkg-make-index.sh . > Packages
           gzip -9c Packages > Packages.gz
 
