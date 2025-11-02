@@ -47,10 +47,10 @@ jobs:
           
       - name: Setup usign private key
         env:
-          USIGN_KEY: ${{ secrets.USIGN_KEY }}
+          USIGN_PRIV_B64: ${{ secrets.USIGN_PRIV_B64 }}
         run: |
           cd packages
-          echo "$USIGN_KEY" > usign.key
+          echo "$USIGN_PRIV_B64" | base64 -d > usign.key
           chmod 600 usign.key
           
       - name: Sign Packages.gz index with usign
