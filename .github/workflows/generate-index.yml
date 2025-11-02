@@ -43,7 +43,7 @@ jobs:
           rm -f Packages Packages.gz Packages.sig
           chmod +x ipkg-make-index.sh
           ./ipkg-make-index.sh . > Packages
-          gzip -9n -с Packages > Packages.gz
+          gzip -9n -c Packages > Packages.gz
           
       - name: Setup usign private key
         env:
