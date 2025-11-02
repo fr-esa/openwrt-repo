@@ -50,7 +50,7 @@ jobs:
           USIGN_KEY: ${{ secrets.USIGN_KEY }}
         run: |
           echo "$USIGN_KEY" > usign.key
-          chmod 600 usign.key
+          chmod 644 usign.key
           
       - name: Sign Packages.gz index with usign
         run: |
