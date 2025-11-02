@@ -58,7 +58,6 @@ jobs:
       - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          cat usign.key
           usign -S -m Packages -s usign.key -x Packages.sig
 
       - name: Commit and push index and signature
