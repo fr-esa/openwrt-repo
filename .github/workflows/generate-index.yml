@@ -1,6 +1,19 @@
+name: Build OpenWrt Packages Index
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'packages/**'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -14,14 +27,13 @@ jobs:
           cmake ..
           make
           sudo make install
-          cd ../..
 
-      - name: Prepare usign private key
+      - name: Setup usign private key
         env:
-          USIGN_PRIVATE_KEY: ${{ secrets.USIGN_PRIVATE_KEY }}
+          USIGN_KEY: ${{ secrets.USIGN_KEY }}
         run: |
-          echo "$USIGN_PRIVATE_KEY" > usign_key
-          chmod 600 usign_key
+          echo "$USIGN_KEY" > usign.key
+          chmod 600 usign.key
 
       - name: Build Packages index
         run: |
@@ -40,11 +52,10 @@ jobs:
           gzip -9c Packages > Packages.gz
           cp Packages Packages.manifest
 
-      - name: Sign Packages.gz with usign
+      - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          usign -S -s ../usign_key -m Packages.gz -x Packages.sig
-          ls -l Packages.sig
+          ./../../usign/build/usign -S -s ../usign.key -m Packages.gz -x Packages.sig
 
       - name: Commit and push index and signature
         env:
