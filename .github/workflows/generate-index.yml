@@ -60,7 +60,7 @@ jobs:
       - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          usign -S -m Packages.gz -s usign.key -o Packages.sig
+          usign -S -m Packages.gz -s usign.key -S Packages.sig
           ls -l Packages.sig
           head -c 100 Packages.sig | base64
 
