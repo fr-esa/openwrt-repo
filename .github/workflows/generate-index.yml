@@ -54,7 +54,7 @@ jobs:
           cd packages
           echo "Signing Packages with key ID: $KEYID"
           gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" --default-key "$KEYID" \
-              --detach-sign --armor -o Packages.sig Packages.gz
+              --detach-sign --armor -o Packages.sig Packages
 
       - name: Commit and push index and signature
         env:
