@@ -3,54 +3,52 @@ name: Build OpenWrt Package Index
 on:
   push:
     paths:
-      - 'packages/**'     # Запускать, если изменились .ipk файлы
+      - 'packages/**'
 
 jobs:
   build-index:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y dpkg-dev gzip
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev gzip
 
-    - name: Create package index
-      run: |
-        cd packages
+      - name: Create package index
+        run: |
+          cd packages
 
-        # Создадим файл Packages
-        dpkg-scanpackages . /dev/null > Packages
+          # Создаем файл Packages
+          dpkg-scanpackages . /dev/null > Packages
 
-        # Сжимаем Packages
-        gzip -kf Packages
+          # Сжимаем Packages
+          gzip -kf Packages
 
-        # Создаем Release файл с хэшами
-        cat <<EOF > Release
-Origin: YourName
-Label: OpenWrt custom repo 24.10.4
-Suite: stable
-Version: 24.10.4
-Codename: openwrt-24.10.4
-Architectures: all
-Components: main
-Description: Custom OpenWrt packages repo on GitHub
-Date: $(date -R)
-EOF
+          # Создаем Release файл
+          echo "Origin: YourName" > Release
+          echo "Label: OpenWrt custom repo 24.10.4" >> Release
+          echo "Suite: stable" >> Release
+          echo "Version: 24.10.4" >> Release
+          echo "Codename: openwrt-24.10.4" >> Release
+          echo "Architectures: all" >> Release
+          echo "Components: main" >> Release
+          echo "Description: Custom OpenWrt packages repo on GitHub" >> Release
+          echo "Date: $(date -R)" >> Release
 
-        # Добавим хэши для Packages и Packages.gz
-        echo "SHA256:" >> Release
-        sha256sum Packages >> Release
-        sha256sum Packages.gz >> Release
+          # Добавляем хэши SHA256 для Packages и Packages.gz
+          echo "SHA256:" >> Release
+          sha256sum Packages | awk '{print " " $1 " " $2}' >> Release
+          sha256sum Packages.gz | awk '{print " " $1 " " $2}' >> Release
 
-    - name: Commit and push generated indexes
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit and push generated indexes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        git add packages/Packages packages/Packages.gz packages/Release
-        git commit -m "Update package indexes" || echo "No changes to commit"
-        git push
+          git add packages/Packages packages/Packages.gz packages/Release
+          git commit -m "Update package indexes" || echo "No changes to commit"
+          git push
