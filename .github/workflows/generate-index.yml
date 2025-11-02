@@ -1,4 +1,4 @@
-name: Build OpenWrt Packages Index with usign
+name: Build OpenWrt Packages Index
 
 permissions:
   contents: write
@@ -15,61 +15,60 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Install build dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git
+    # Сборка usign из исходников
+    - name: Build usign from source
+      run: |
+        git clone https://github.com/openwrt/usign.git
+        cd usign
+        mkdir build
+        cd build
+        cmake ..
+        make
+        sudo make install
 
-      - name: Build usign from source
-        run: |
-          git clone https://github.com/openwrt/usign.git
-          cd usign
-          mkdir build
-          cd build
-          cmake ..
-          make
-          make install
+    # Импорт ключа usign из секрета (приватный ключ)
+    # Сохраним ключ в файл, чтобы usign мог им пользоваться
+    - name: Setup usign private key
+      env:
+        USIGN_KEY: ${{ secrets.USIGN_KEY }}
+      run: |
+        echo "$USIGN_KEY" > usign.key
+        chmod 600 usign.key
 
-      - name: Prepare usign private key
-        env:
-          USIGN_KEY: ${{ secrets.USIGN_KEY }}
-        run: |
-          echo "$USIGN_KEY" 
-          #| base64 -d > packages/Packages.sig
-          chmod 600 packages/Packages.sig
+    - name: Build Packages index
+      run: |
+        cd packages
+        rm -f Packages Packages.gz Packages.manifest Packages.sig Packages.gz.sig
+        for f in *.ipk; do
+          echo "Generating entry for $f"
+          tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
+          echo "" >> Packages
+          echo "Filename: $f" >> Packages
+          echo "Size: $(stat -c%s "$f")" >> Packages
+          echo "MD5Sum: $(md5sum "$f" | cut -d' ' -f1)" >> Packages
+          echo "SHA256sum: $(sha256sum "$f" | cut -d' ' -f1)" >> Packages
+          echo "" >> Packages
+        done
+        gzip -9c Packages > Packages.gz
+        cp Packages Packages.manifest
 
-      - name: Build Packages index
-        run: |
-          cd packages
-          rm -f Packages Packages.gz Packages.manifest 
-          #Packages.sig
-          for f in *.ipk; do
-            echo "Generating entry for $f"
-            tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
-            echo "" >> Packages
-            echo "Filename: $f" >> Packages
-            echo "Size: $(stat -c%s "$f")" >> Packages
-            echo "MD5Sum: $(md5sum "$f" | cut -d' ' -f1)" >> Packages
-            echo "SHA256sum: $(sha256sum "$f" | cut -d' ' -f1)" >> Packages
-            echo "" >> Packages
-          done
-          gzip -9c Packages > Packages.gz
-          cp Packages Packages.manifest
+    # Подпись Packages.gz с помощью usign
+    - name: Sign Packages.gz index with usign
+      run: |
+        cd packages
+        ../usign/build/usign -S -m Packages.gz -s ../usign.key -o Packages.sig
+        ls -l Packages.sig
+        head -c 100 Packages.sig | xxd -p
 
-      - name: Sign Packages.gz index with usign
-        run: |
-          cd packages
-          usign -S -m Packages.gz -s Packages.sig
-
-      - name: Commit and push index and signature
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/Packages* 
-          git commit -m "Update package index and signature" || echo "No changes to commit"
-          git push
+    - name: Commit and push index and signature
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add packages/Packages* 
+        git commit -m "Update package index and signature" || echo "No changes to commit"
+        git push
