@@ -18,10 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Import GPG key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --list-keys
+
       - name: Build Packages index
         run: |
           cd packages
-          rm -f Packages Packages.gz Packages.manifest
+          rm -f Packages Packages.gz Packages.manifest Packages.sig
           for f in *.ipk; do
             echo "Generating entry for $f"
             tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
@@ -35,6 +42,11 @@ jobs:
           gzip -9c Packages > Packages.gz
           cp Packages Packages.manifest
 
+      - name: Sign Packages index
+        run: |
+          cd packages
+          gpg --batch --yes --detach-sign --armor -o Packages.sig Packages
+
       - name: Commit and push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,5 +54,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add packages/Packages*
-          git commit -m "Update package index" || echo "No changes to commit"
+          git commit -m "Update package index and signature" || echo "No changes to commit"
           git push
