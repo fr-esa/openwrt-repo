@@ -18,6 +18,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install sha256sum (coreutils)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y coreutils
+
       - name: Build usign from source
         run: |
           git clone https://github.com/openwrt/usign.git
@@ -45,7 +50,7 @@ jobs:
           echo "$USIGN_PRIV_B64" | base64 -d > usign.key
           chmod 600 usign.key
           
-      - name: Sign Packages.gz index with usign
+      - name: Sign Packages index with usign
         run: |
           cd packages
           usign -S -m Packages -s usign.key -x Packages.sig
