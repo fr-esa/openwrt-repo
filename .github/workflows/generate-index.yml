@@ -1,4 +1,4 @@
-name: Build OpenWrt Packages Index
+name: Build OpenWrt Packages Index with usign
 
 permissions:
   contents: write
@@ -18,21 +18,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Import GPG private key
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      - name: Install usign
         run: |
-          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-          echo "Listing imported keys:"
-          gpg --list-secret-keys --keyid-format LONG
-          KEYID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2 | head -n1)
-          echo "KEYID=$KEYID" >> $GITHUB_ENV
-          echo "Using key ID: $KEYID"
+          sudo apt-get update
+          sudo apt-get install -y usign
+
+      - name: Prepare usign private key
+        env:
+          USIGN_KEY: ${{ secrets.USIGN_KEY }}
+        run: |
+          echo "$USIGN_KEY" | base64 -d > packages/usign.key
+          chmod 600 packages/usign.key
 
       - name: Build Packages index
         run: |
           cd packages
-          rm -f Packages Packages.gz Packages.manifest Packages.sig Packages.gz.sig
+          rm -f Packages Packages.gz Packages.manifest Packages.sig
           for f in *.ipk; do
             echo "Generating entry for $f"
             tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
@@ -46,17 +47,12 @@ jobs:
           gzip -9c Packages > Packages.gz
           cp Packages Packages.manifest
 
-      - name: Sign Packages.gz index (detached ASCII signature)
-        env:
-          KEYID: ${{ env.KEYID }}
+      - name: Sign Packages.gz index with usign
         run: |
           cd packages
-          echo "Signing Packages.gz with key ID: $KEYID"
-          gpg --batch --yes --pinentry-mode loopback --default-key "$KEYID" \
-              --detach-sign -o Packages.sig Packages.gz
+          usign -S -m Packages.gz -s usign.key -o Packages.sig
           ls -l Packages.sig
-          file Packages.sig
-          head -c 100 Packages.sig | xxd
+          head -c 100 Packages.sig | base64
 
       - name: Commit and push index and signature
         env:
