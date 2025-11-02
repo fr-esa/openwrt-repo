@@ -51,7 +51,6 @@ jobs:
         run: |
           cd packages
           echo "$USIGN_PRIV_B64" | base64 -d > usign.key
-          cat usign.key
           chmod 600 usign.key
           
       - name: Sign Packages.gz index with usign
