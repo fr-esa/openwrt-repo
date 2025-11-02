@@ -15,20 +15,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Import GPG key
+      - name: Import GPG private key
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
-          mkdir -p ~/.gnupg
-          chmod 700 ~/.gnupg
-          echo "use-agent" >> ~/.gnupg/gpg.conf
-          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           echo "$GPG_PRIVATE_KEY" | gpg --batch --import
-          gpg --list-keys
+          echo "Imported keys:"
+          gpg --list-secret-keys --keyid-format LONG
+
+      - name: Extract GPG key ID
+        id: gpg
+        run: |
+          KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -n1 | awk '{print $2}' | cut -d'/' -f2)
+          echo "KEY_ID=$KEY_ID" >> $GITHUB_ENV
+          echo "Using key: $KEY_ID"
 
       - name: Build Packages index
         run: |
@@ -48,19 +51,17 @@ jobs:
           cp Packages Packages.manifest
 
       - name: Sign Packages index
-        env:
-          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
         run: |
           cd packages
-          gpg --batch --yes --pinentry-mode loopback --passphrase "" \
-              --detach-sign --armor -u "${GPG_KEY_ID}" -o Packages.sig Packages
+          gpg --batch --yes --local-user "$KEY_ID" --detach-sign --armor -o Packages.sig Packages
+          echo "Signature created for key $KEY_ID"
 
-      - name: Commit and push
+      - name: Commit and push index + signature
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add packages/Packages*
-          git commit -m "Update package index and signature" || echo "No changes to commit"
+          git commit -m "Update Packages index and signature" || echo "No changes to commit"
           git push
