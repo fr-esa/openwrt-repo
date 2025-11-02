@@ -41,6 +41,8 @@ jobs:
         run: |
           cd packages
           rm -f Packages Packages.gz Packages.sig
+          file packages/*.ipk
+          head -c 20 packages/*.ipk | xxd
           chmod +x ipkg-make-index.sh
           ./ipkg-make-index.sh . > Packages
           gzip -9c Packages > Packages.gz
