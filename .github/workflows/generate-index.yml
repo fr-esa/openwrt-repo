@@ -27,8 +27,11 @@ jobs:
         run: |
           git clone https://github.com/openwrt/usign.git
           cd usign
+          mkdir build
+          cd build
+          cmake ..
           make
-          sudo cp usign /usr/local/bin/
+          make install
 
       - name: Prepare usign private key
         env:
