@@ -29,23 +29,13 @@ jobs:
           make install
 
       - name: Build Packages index
-        run: |
+         run: |
           cd packages
-          ls -la
-          rm -f Packages Packages.gz Packages.manifest Packages.sig
-          ls -la
-          for f in *.ipk; do
-            echo "Generating entry for $f"
-            tar -Oxzf "$f" ./control.tar.gz | tar -xzOf - ./control >> Packages
-            echo "" >> Packages
-            echo "Filename: $f" >> Packages
-            echo "Size: $(stat -c%s "$f")" >> Packages
-            echo "MD5Sum: $(md5sum "$f" | cut -d' ' -f1)" >> Packages
-            echo "SHA256sum: $(sha256sum "$f" | cut -d' ' -f1)" >> Packages
-            echo "" >> Packages
-          done
+          rm -f Packages Packages.gz Packages.sig
+          curl -sO https://raw.githubusercontent.com/openwrt/openwrt/master/scripts/ipkg-make-index.sh
+          chmod +x ipkg-make-index.sh
+          ./ipkg-make-index.sh . > Packages
           gzip -9c Packages > Packages.gz
-          cp Packages Packages.manifest
           
       - name: Setup usign private key
         env:
