@@ -25,7 +25,6 @@ jobs:
           echo "$GPG_PRIVATE_KEY" | gpg --batch --import
           echo "Listing imported keys:"
           gpg --list-secret-keys --keyid-format LONG
-          # Сохраняем ID первого ключа
           KEYID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2 | head -n1)
           echo "KEYID=$KEYID" >> $GITHUB_ENV
           echo "Using key ID: $KEYID"
@@ -50,10 +49,11 @@ jobs:
       - name: Sign Packages index (detached ASCII signature)
         env:
           KEYID: ${{ env.KEYID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           cd packages
           echo "Signing Packages with key ID: $KEYID"
-          gpg --batch --yes --pinentry-mode loopback --default-key "$KEYID" \
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$GPG_PASSPHRASE" --default-key "$KEYID" \
               --detach-sign --armor -o Packages.sig Packages
 
       - name: Commit and push index and signature
