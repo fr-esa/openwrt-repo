@@ -28,9 +28,13 @@ for pkg in "$pkg_dir"/*.ipk; do
   
   file_size=$(stat -L -c%s "$pkg")
   sha256sum=$(sha256sum "$pkg" | cut -d' ' -f1)
+  filename="${pkg##*/}"
   
-  # Вот ключевая часть: добавляем Filename, Size, SHA256sum перед Description, с корректными переносами строк
-  tar -Oxzf "$tempdir/control.tar.gz" ./control | sed -e "1iFilename: ${pkg##*/}\nSize: $file_size\nSHA256sum: $sha256sum" 
+  # Получаем содержимое control
+  control_content=$(tar -Oxzf "$tempdir/control.tar.gz" ./control)
+  
+  # Вставляем перед Description:
+  echo "$control_content" | sed -e "/^Description:/iFilename: $filename\nSize: $file_size\nSHA256sum: $sha256sum"
   
   echo
   
