@@ -107,4 +107,5 @@ EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add packages/Packages*
-          git commit -m "Update package index and signature" ||
+          git commit -m "Update package index and signature" || echo "No changes to commit"
+          git push
