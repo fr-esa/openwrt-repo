@@ -56,6 +56,7 @@ jobs:
         run: |
           cd packages
           gzip -9n -c Packages > Packages.gz
+          usign -F -s usign.key
           usign -S -m Packages.gz -s usign.key -x Packages.sig
 
       - name: Commit and push index and signature
