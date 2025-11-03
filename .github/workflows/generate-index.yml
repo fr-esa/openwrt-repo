@@ -35,7 +35,7 @@ jobs:
           cd build
           cmake ..
           make
-          make install
+          sudo make install
 
       - name: Build Packages index
         run: |
