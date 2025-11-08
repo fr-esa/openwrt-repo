@@ -49,23 +49,6 @@ Size: 7438
 SHA256sum: 289ace7cafe0a25410f896dbe4777ca1be31f97d26c9be8c64ac8da4216a680d
 Description:  CPU performance information and management for LuCI
 
-Package: luci-app-cpu-perf
-Version: 0.6.1-r1
-Depends: libc, ucode, ucode-mod-fs
-Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-cpu-perf/_GitHub/luci-app-cpu-perf
-SourceName: luci-app-cpu-perf
-License: MIT
-Section: luci
-SourceDateEpoch: 1760636176
-URL: https://github.com/openwrt/luci
-Maintainer: OpenWrt LuCI community
-Architecture: all
-Installed-Size: 51200
-Filename: luci-app-cpu-perf_0.6.1-r1_all.ipk
-Size: 9049
-SHA256sum: bee2ed38669b389113ab9779b2bc3a03c98c2f780c3ef46263b43ec4d86111d3
-Description:  CPU performance information and management for LuCI
-
 Package: luci-app-internet-detector
 Version: 1.7.0-r1
 Depends: libc, internet-detector
