@@ -1,0 +1,202 @@
+Package: internet-detector
+Version: 1.7.0-r1
+Depends: libc, lua, luaposix, libuci-lua
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector
+SourceName: internet-detector
+Section: net
+SourceDateEpoch: 1759610111
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 92160
+Filename: internet-detector_1.7.0-r1_all.ipk
+Size: 16324
+SHA256sum: 704865499bc2e66e57d2672784cbe3375032458b90e1e5dd4d196ccf429eae9e
+Description:  Internet-detector is a small daemon
+ for checking Internet availability.
+ Written in Lua using the luaposix library.
+
+Package: internet-detector-mod-telegram
+Version: 1.7.0-r1
+Depends: libc, internet-detector, curl
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector-mod-telegram
+SourceName: internet-detector-mod-telegram
+Section: net
+SourceDateEpoch: 1759610111
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 20480
+Filename: internet-detector-mod-telegram_1.7.0-r1_all.ipk
+Size: 3216
+SHA256sum: 8ed1729e3120d089d3a75c0bec0326d853e82432da75ad97e544ca1b94272b82
+Description:  Telegram messenger support for internet-detector.
+
+Package: luci-app-cpu-perf
+Version: 0.4.1-r1
+Depends: libc, lua, luci-lib-nixio, luci-lib-jsonc
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-cpu-perf/_GitHub/luci-app-cpu-perf
+SourceName: luci-app-cpu-perf
+License: MIT
+Section: luci
+SourceDateEpoch: 1733238727
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-cpu-perf_0.4.1-r1_all.ipk
+Size: 7438
+SHA256sum: 289ace7cafe0a25410f896dbe4777ca1be31f97d26c9be8c64ac8da4216a680d
+Description:  CPU performance information and management for LuCI
+
+Package: luci-app-internet-detector
+Version: 1.7.0-r1
+Depends: libc, internet-detector
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/luci-app-internet-detector
+SourceName: luci-app-internet-detector
+Section: luci
+SourceDateEpoch: 1759610111
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 71680
+Filename: luci-app-internet-detector_1.7.0-r1_all.ipk
+Size: 12927
+SHA256sum: 02d7fd6c306c7126c5397db2bc72f7808601b0f462d6f7e2832bc4c74e9495ab
+Description:  LuCI support for internet-detector
+
+Package: luci-app-pbr
+Version: 1.2.1-r31
+Depends: libc, luci-base, jsonfilter, pbr
+Source: /feed/luci/applications/luci-app-pbr
+SourceName: luci-app-pbr
+License: AGPL-3.0-or-later
+Section: luci
+SourceDateEpoch: 1764280346
+URL: https://github.com/stangri/luci-app-pbr/
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 61440
+Filename: luci-app-pbr-1.2.1-31_openwrt-24.10_all.ipk
+Size: 10861
+SHA256sum: d4d8b2f5d7df6ef1f421a169159019b6ee79e74977f6f579e0e69e036966250a
+Description:  Provides Web UI for Policy Based Routing Service.
+
+Package: luci-app-temp-status
+Version: 0.7.1-r2
+Depends: libc, ucode, ucode-mod-fs
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-temp-status/_GitHub/luci-app-temp-status
+SourceName: luci-app-temp-status
+License: MIT
+Section: luci
+SourceDateEpoch: 1752751655
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-temp-status_0.7.1-r2_all.ipk
+Size: 8212
+SHA256sum: 0b002e2172d3315fb006c263116aeb6412704519cdbbd696714ab3cd64ce25d2
+Description:  Temperature sensors data for the LuCI status page
+
+Package: luci-app-vlmcsd
+Version: 1.0.2-1
+Depends: libc, vlmcsd
+Source: package/luci-app-vlmcsd
+License: MIT
+LicenseFiles: LICENSE
+Section: luci
+Maintainer: fuyumi
+Architecture: all
+Installed-Size: 1633
+Filename: luci-app-vlmcsd_1.0.2-1_all.ipk
+Size: 2496
+SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
+Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
+
+Package: luci-app-zapret
+Version: 72.20251022-r1
+Depends: libc, zapret
+Source: feeds/base/zapret-openwrt/luci-app-zapret
+SourceName: luci-app-zapret
+License: MIT
+Section: luci
+SourceDateEpoch: 1761135329
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 81920
+Filename: luci-app-zapret_72.20251022-r1_all.ipk
+Size: 13735
+SHA256sum: 139dbf6b07ed50c18d1a318913f930dcc96ec4d1f86808910abef6b1e50a1b56
+Description:  LuCI support for zapret
+
+Package: luci-theme-argon
+Version: 2.3.2-r20250207
+Depends: libc, curl, jsonfilter, luci-lua-runtime
+Source: feeds/base/downloads/luci-theme-argon
+SourceName: luci-theme-argon
+Section: luci
+SourceDateEpoch: 1739087731
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 768000
+Filename: luci-theme-argon_2.3.2-r20250207_all.ipk
+Size: 391910
+SHA256sum: 8836e6bb0f94d610c87a9077fbfbd1681f4f0d17b29d6d3af13a58ca4f504a33
+Description:  Argon Theme
+
+Package: pbr-netifd
+Version: 1.2.1-r7
+Depends: libc, ip-full, jshn, jsonfilter, resolveip
+Provides: pbr
+Source: /feed/pbr
+SourceName: pbr
+License: AGPL-3.0-or-later
+Section: net
+SourceDateEpoch: 1758833715
+URL: https://github.com/stangri/pbr/
+Maintainer: Stan Grishin <stangri@melmac.ca>
+Architecture: all
+Installed-Size: 143360
+Filename: pbr-1.2.1-7_openwrt-24.10_all.ipk
+Size: 28348
+SHA256sum: 0d387bf9e32e10ac1e960b80af24cdd9c1c43b659644bfced760a52a54622863
+Description:  This service enables policy-based routing for WAN interfaces and various VPN tunnels.
+ This version supports OpenWrt with (23.05 and newer) firewall4/nft.
+ This version uses OpenWrt native netifd/tables to set up interfaces. This is a WIP.
+
+Package: vlmcsd
+Version: svn1113-1
+Depends: libc, libpthread
+Source: package/vlmcsd
+License: MIT
+LicenseFiles: LICENSE
+Section: net
+Maintainer: HotBird64
+Architecture: x86_64
+Installed-Size: 57903
+Filename: vlmcsd_svn1113-1_x86_64.ipk
+Size: 58635
+SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
+Description:  vlmcsd is a KMS Emulator in C.
+
+Package: zapret
+Version: 72.20251022
+Depends: libc, nftables, curl, gzip, coreutils, coreutils-sort, coreutils-sleep, kmod-nft-nat, kmod-nft-offload, kmod-nft-queue, libnetfilter-queue1, libcap, zlib
+Source: feeds/base/zapret-openwrt/zapret
+SourceName: zapret
+License: MIT
+LicenseFiles: docs/LICENSE.txt
+Section: net
+SourceDateEpoch: 1761135329
+URL: https://github.com/bol-van/zapret
+Maintainer: bol-van
+Architecture: x86_64
+Installed-Size: 501760
+Filename: zapret_72.20251022_x86_64.ipk
+Size: 162575
+SHA256sum: e943d1b3583f1f7a8c42814a46598981c3e445366320d1fe785654f5b7eae2cd
+Description:  zapret
+
