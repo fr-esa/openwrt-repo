@@ -65,23 +65,6 @@ Size: 12927
 SHA256sum: 02d7fd6c306c7126c5397db2bc72f7808601b0f462d6f7e2832bc4c74e9495ab
 Description:  LuCI support for internet-detector
 
-Package: luci-app-pbr
-Version: 1.2.1-r31
-Depends: libc, luci-base, jsonfilter, pbr
-Source: /feed/luci/applications/luci-app-pbr
-SourceName: luci-app-pbr
-License: AGPL-3.0-or-later
-Section: luci
-SourceDateEpoch: 1764280346
-URL: https://github.com/stangri/luci-app-pbr/
-Maintainer: OpenWrt LuCI community
-Architecture: all
-Installed-Size: 61440
-Filename: luci-app-pbr-1.2.1-31_openwrt-24.10_all.ipk
-Size: 10861
-SHA256sum: d4d8b2f5d7df6ef1f421a169159019b6ee79e74977f6f579e0e69e036966250a
-Description:  Provides Web UI for Policy Based Routing Service.
-
 Package: luci-app-temp-status
 Version: 0.7.1-r2
 Depends: libc, ucode, ucode-mod-fs
@@ -146,26 +129,6 @@ Filename: luci-theme-argon_2.3.2-r20250207_all.ipk
 Size: 391910
 SHA256sum: 8836e6bb0f94d610c87a9077fbfbd1681f4f0d17b29d6d3af13a58ca4f504a33
 Description:  Argon Theme
-
-Package: pbr-netifd
-Version: 1.2.1-r7
-Depends: libc, ip-full, jshn, jsonfilter, resolveip
-Provides: pbr
-Source: /feed/pbr
-SourceName: pbr
-License: AGPL-3.0-or-later
-Section: net
-SourceDateEpoch: 1758833715
-URL: https://github.com/stangri/pbr/
-Maintainer: Stan Grishin <stangri@melmac.ca>
-Architecture: all
-Installed-Size: 143360
-Filename: pbr-1.2.1-7_openwrt-24.10_all.ipk
-Size: 28348
-SHA256sum: 0d387bf9e32e10ac1e960b80af24cdd9c1c43b659644bfced760a52a54622863
-Description:  This service enables policy-based routing for WAN interfaces and various VPN tunnels.
- This version supports OpenWrt with (23.05 and newer) firewall4/nft.
- This version uses OpenWrt native netifd/tables to set up interfaces. This is a WIP.
 
 Package: vlmcsd
 Version: svn1113-1
