@@ -150,6 +150,23 @@ Size: 11884
 SHA256sum: c40993752d01f9bd050e186f31c7141d917af2f7e02b0fdd75c3dd89fd6a6a9c
 Description:  Web interface for managing zapret2 DPI bypass tool
 
+Package: luci-app-zapret2
+Version: 0.6.1-r125
+Depends: libc, luci-base, zapret2
+Source: feeds/base/luci-app-zapret2
+SourceName: luci-app-zapret2
+License: MIT
+Section: luci
+SourceDateEpoch: 1760891865
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 61440
+Filename: luci-app-zapret2_0.6.1-r125_all.ipk
+Size: 11920
+SHA256sum: 2484bf733ab45622293e87d13662a7fc0f9da93c399c036db49697716b910429
+Description:  Web interface for managing zapret2 DPI bypass tool
+
 Package: luci-app-zapret
 Version: 72.20251022-r1
 Depends: libc, zapret
@@ -216,7 +233,7 @@ SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
 Package: zapret2
-Version: 0.6.1-r122
+Version: 0.6.1-r125
 Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl
 Source: feeds/base/zapret2
 SourceName: zapret2
@@ -225,28 +242,10 @@ SourceDateEpoch: 1760891865
 Maintainer: zapret2wrt
 Architecture: x86_64
 Installed-Size: 665600
-Filename: zapret2_0.6.1-r122_x86_64.ipk
-Size: 393473
-SHA256sum: d89ad1ccd07934091de20dbb695ac556ba3ac4d9b8927bc6a047eb738be860e5
+Filename: zapret2_0.6.1-r125_x86_64.ipk
+Size: 393442
+SHA256sum: 2fffce710eb0a2769ffe75efbafc89c91757b8e55b842182baa0182192548968
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
-
-Package: zapret
-Version: 72.20251022
-Depends: libc, nftables, curl, gzip, coreutils, coreutils-sort, coreutils-sleep, kmod-nft-nat, kmod-nft-offload, kmod-nft-queue, libnetfilter-queue1, libcap, zlib
-Source: feeds/base/zapret-openwrt/zapret
-SourceName: zapret
-License: MIT
-LicenseFiles: docs/LICENSE.txt
-Section: net
-SourceDateEpoch: 1761135329
-URL: https://github.com/bol-van/zapret
-Maintainer: bol-van
-Architecture: x86_64
-Installed-Size: 501760
-Filename: zapret_72.20251022_x86_64.ipk
-Size: 162575
-SHA256sum: e943d1b3583f1f7a8c42814a46598981c3e445366320d1fe785654f5b7eae2cd
-Description:  zapret
 
