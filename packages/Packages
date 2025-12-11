@@ -134,7 +134,7 @@ SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
 Package: luci-app-zapret2
-Version: 0.6.1-r107
+Version: 0.6.1-r122
 Depends: libc, luci-base, zapret2
 Source: feeds/base/luci-app-zapret2
 SourceName: luci-app-zapret2
@@ -145,9 +145,9 @@ URL: https://github.com/openwrt/luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 61440
-Filename: luci-app-zapret2_0.6.1-r107_all.ipk
-Size: 11820
-SHA256sum: 52794b67e3e08696396feb5b70285484ee80ee877cdec800d29f86696e014a9d
+Filename: luci-app-zapret2_0.6.1-r122_all.ipk
+Size: 11884
+SHA256sum: c40993752d01f9bd050e186f31c7141d917af2f7e02b0fdd75c3dd89fd6a6a9c
 Description:  Web interface for managing zapret2 DPI bypass tool
 
 Package: luci-app-zapret
@@ -216,7 +216,7 @@ SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
 Package: zapret2
-Version: 0.6.1-r107
+Version: 0.6.1-r122
 Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl
 Source: feeds/base/zapret2
 SourceName: zapret2
@@ -225,9 +225,9 @@ SourceDateEpoch: 1760891865
 Maintainer: zapret2wrt
 Architecture: x86_64
 Installed-Size: 665600
-Filename: zapret2_0.6.1-r107_x86_64.ipk
-Size: 393122
-SHA256sum: 77ecf9adfb79c69dc59ee8b62026a5286e04a9cae74fc225587118b63e9d6e69
+Filename: zapret2_0.6.1-r122_x86_64.ipk
+Size: 393473
+SHA256sum: d89ad1ccd07934091de20dbb695ac556ba3ac4d9b8927bc6a047eb738be860e5
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
