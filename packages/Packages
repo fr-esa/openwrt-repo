@@ -134,7 +134,7 @@ SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
 Package: luci-app-zapret2
-Version: 0.6.1-r122
+Version: 0.6.1-r128
 Depends: libc, luci-base, zapret2
 Source: feeds/base/luci-app-zapret2
 SourceName: luci-app-zapret2
@@ -145,26 +145,9 @@ URL: https://github.com/openwrt/luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 61440
-Filename: luci-app-zapret2_0.6.1-r122_all.ipk
-Size: 11884
-SHA256sum: c40993752d01f9bd050e186f31c7141d917af2f7e02b0fdd75c3dd89fd6a6a9c
-Description:  Web interface for managing zapret2 DPI bypass tool
-
-Package: luci-app-zapret2
-Version: 0.6.1-r126
-Depends: libc, luci-base, zapret2
-Source: feeds/base/luci-app-zapret2
-SourceName: luci-app-zapret2
-License: MIT
-Section: luci
-SourceDateEpoch: 1760891865
-URL: https://github.com/openwrt/luci
-Maintainer: OpenWrt LuCI community
-Architecture: all
-Installed-Size: 61440
-Filename: luci-app-zapret2_0.6.1-r126_all.ipk
-Size: 11910
-SHA256sum: aefa6b5331afba7c7cb0db2f91d7e55e735b7a15ed74fc4afe1ae9d9deb94678
+Filename: luci-app-zapret2_0.6.1-r128_all.ipk
+Size: 11920
+SHA256sum: 3dfd7ab37e9fc0e9c371628ecfd11da4535b14da4b0655f0deff55f70aca4d45
 Description:  Web interface for managing zapret2 DPI bypass tool
 
 Package: luci-app-zapret
@@ -233,7 +216,7 @@ SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
 Package: zapret2
-Version: 0.6.1-r126
+Version: 0.6.1-r128
 Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl
 Source: feeds/base/zapret2
 SourceName: zapret2
@@ -242,9 +225,9 @@ SourceDateEpoch: 1760891865
 Maintainer: zapret2wrt
 Architecture: x86_64
 Installed-Size: 665600
-Filename: zapret2_0.6.1-r126_x86_64.ipk
-Size: 393442
-SHA256sum: 4b7cb23271670d05a125dc31d08d085ae5fdb20ade4ec650ddc23049e2ddb1eb
+Filename: zapret2_0.6.1-r128_x86_64.ipk
+Size: 393518
+SHA256sum: 201c1b6cc0bc03d43820b480ee84bbff0f46b242f04023d460c83a7c963fbcfa
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
