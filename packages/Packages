@@ -1,0 +1,234 @@
+Package: amneziawg-tools
+Version: 1.0.20250903-r1
+Depends: libc
+Source: feeds/base/amneziawg-tools
+SourceName: amneziawg-tools
+License: GPL-2.0
+LicenseFiles: COPYING
+Section: opt
+SourceDateEpoch: 1760891865
+URL: https://amnezia.org/
+Maintainer: Amnezia Admin <admin@amnezia.org>
+Architecture: x86_64
+Installed-Size: 92160
+Filename: amneziawg-tools_v24.10.4_x86_64_x86_64.ipk
+Size: 32974
+SHA256sum: 8acaf692b792f54c50282412111c526dacf859c16713dd7aaee19d9b6d236d77
+Description:  Amnezia VPN — simple and free app to run a self-hosted VPN with
+ high privacy requirements.
+ 
+ This package provides the userspace control program for AmneziaWG,
+ `awg`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: internet-detector
+Version: 1.7.0-r1
+Depends: libc, lua, luaposix, libuci-lua
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector
+SourceName: internet-detector
+Section: net
+SourceDateEpoch: 1759610111
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 92160
+Filename: internet-detector_1.7.0-r1_all.ipk
+Size: 16324
+SHA256sum: 704865499bc2e66e57d2672784cbe3375032458b90e1e5dd4d196ccf429eae9e
+Description:  Internet-detector is a small daemon
+ for checking Internet availability.
+ Written in Lua using the luaposix library.
+
+Package: internet-detector-mod-telegram
+Version: 1.7.0-r1
+Depends: libc, internet-detector, curl
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/internet-detector-mod-telegram
+SourceName: internet-detector-mod-telegram
+Section: net
+SourceDateEpoch: 1759610111
+URL: https://github.com/gSpotx2f/luci-app-internet-detector
+Maintainer: gSpot <https://github.com/gSpotx2f/luci-app-internet-detector>
+Architecture: all
+Installed-Size: 20480
+Filename: internet-detector-mod-telegram_1.7.0-r1_all.ipk
+Size: 3216
+SHA256sum: 8ed1729e3120d089d3a75c0bec0326d853e82432da75ad97e544ca1b94272b82
+Description:  Telegram messenger support for internet-detector.
+
+Package: kmod-amneziawg
+Version: 6.6.110.1.0.20251005-r1
+Depends: kernel (=6.6.110~484466e2719a743506c36b4bb2103582-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+SourceName: kmod-amneziawg
+Section: kernel
+SourceDateEpoch: 1760891865
+Architecture: x86_64
+Installed-Size: 174080
+Filename: kmod-amneziawg_v24.10.4_x86_64_x86_64.ipk
+Size: 47349
+SHA256sum: 71b72285262dd1683419bb54e6129cce55600db977188ed9c26fa08e56715b16
+Description:  AmneziaWG VPN Kernel Module
+
+Package: luci-app-cpu-perf
+Version: 0.4.1-r1
+Depends: libc, lua, luci-lib-nixio, luci-lib-jsonc
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-cpu-perf/_GitHub/luci-app-cpu-perf
+SourceName: luci-app-cpu-perf
+License: MIT
+Section: luci
+SourceDateEpoch: 1733238727
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-cpu-perf_0.4.1-r1_all.ipk
+Size: 7438
+SHA256sum: 289ace7cafe0a25410f896dbe4777ca1be31f97d26c9be8c64ac8da4216a680d
+Description:  CPU performance information and management for LuCI
+
+Package: luci-app-internet-detector
+Version: 1.7.0-r1
+Depends: libc, internet-detector
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-internet-detector/_GitHub/internet-detector/luci-app-internet-detector
+SourceName: luci-app-internet-detector
+Section: luci
+SourceDateEpoch: 1759610111
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 71680
+Filename: luci-app-internet-detector_1.7.0-r1_all.ipk
+Size: 12927
+SHA256sum: 02d7fd6c306c7126c5397db2bc72f7808601b0f462d6f7e2832bc4c74e9495ab
+Description:  LuCI support for internet-detector
+
+Package: luci-app-temp-status
+Version: 0.7.1-r2
+Depends: libc, ucode, ucode-mod-fs
+Source: /mounts/storage/Projects/OpenWRT/Projects/luci-app-temp-status/_GitHub/luci-app-temp-status
+SourceName: luci-app-temp-status
+License: MIT
+Section: luci
+SourceDateEpoch: 1752751655
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 40960
+Filename: luci-app-temp-status_0.7.1-r2_all.ipk
+Size: 8212
+SHA256sum: 0b002e2172d3315fb006c263116aeb6412704519cdbbd696714ab3cd64ce25d2
+Description:  Temperature sensors data for the LuCI status page
+
+Package: luci-app-vlmcsd
+Version: 1.0.2-1
+Depends: libc, vlmcsd
+Source: package/luci-app-vlmcsd
+License: MIT
+LicenseFiles: LICENSE
+Section: luci
+Maintainer: fuyumi
+Architecture: all
+Installed-Size: 1633
+Filename: luci-app-vlmcsd_1.0.2-1_all.ipk
+Size: 2496
+SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
+Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
+
+Package: luci-app-zapret2
+Version: 0.6.1-r157
+Depends: libc, luci-base, zapret2
+Source: feeds/base/luci-app-zapret2
+SourceName: luci-app-zapret2
+License: MIT
+Section: luci
+SourceDateEpoch: 1760891865
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 61440
+Filename: luci-app-zapret2_0.6.1-r157_all.ipk
+Size: 12232
+SHA256sum: 5cf36ee5c8bce212ece0fea47ec501349aa81e59134a924ea4f91fdf70767be2
+Description:  Web interface for managing zapret2 DPI bypass tool
+
+Package: luci-app-zapret
+Version: 72.20251022-r1
+Depends: libc, zapret
+Source: feeds/base/zapret-openwrt/luci-app-zapret
+SourceName: luci-app-zapret
+License: MIT
+Section: luci
+SourceDateEpoch: 1761135329
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 81920
+Filename: luci-app-zapret_72.20251022-r1_all.ipk
+Size: 13735
+SHA256sum: 139dbf6b07ed50c18d1a318913f930dcc96ec4d1f86808910abef6b1e50a1b56
+Description:  LuCI support for zapret
+
+Package: luci-proto-amneziawg
+Version: 2.0.4-r1
+Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
+Source: feeds/base/luci-proto-amneziawg
+SourceName: luci-proto-amneziawg
+License: Apache-2.0
+Section: luci
+SourceDateEpoch: 1760891865
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 102400
+Filename: luci-proto-amneziawg_v24.10.4_x86_64_x86_64.ipk
+Size: 27959
+SHA256sum: 011068ff161ef60b6821fac4c1b691194a2bdc82ab3bcb853fff4301df1ca8e8
+Description:  Provides support and Web UI for AmneziaWG VPN
+
+Package: luci-theme-argon
+Version: 2.3.2-r20250207
+Depends: libc, curl, jsonfilter, luci-lua-runtime
+Source: feeds/base/downloads/luci-theme-argon
+SourceName: luci-theme-argon
+Section: luci
+SourceDateEpoch: 1739087731
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 768000
+Filename: luci-theme-argon_2.3.2-r20250207_all.ipk
+Size: 391910
+SHA256sum: 8836e6bb0f94d610c87a9077fbfbd1681f4f0d17b29d6d3af13a58ca4f504a33
+Description:  Argon Theme
+
+Package: vlmcsd
+Version: svn1113-1
+Depends: libc, libpthread
+Source: package/vlmcsd
+License: MIT
+LicenseFiles: LICENSE
+Section: net
+Maintainer: HotBird64
+Architecture: x86_64
+Installed-Size: 57903
+Filename: vlmcsd_svn1113-1_x86_64.ipk
+Size: 58635
+SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
+Description:  vlmcsd is a KMS Emulator in C.
+
+Package: zapret2
+Version: 0.6.1-r157
+Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl
+Source: feeds/base/zapret2
+SourceName: zapret2
+Section: net
+SourceDateEpoch: 1760891865
+Maintainer: zapret2wrt
+Architecture: x86_64
+Installed-Size: 675840
+Filename: zapret2_0.6.1-r157_x86_64.ipk
+Size: 395367
+SHA256sum: 269e3cf43979df0a0fca1016569e8550469502374db004e378f5e1b214d9712f
+Description:  zapret2 is a DPI bypass tool using nfqws2.
+ This is a C rewrite with zeroblock-style management.
+ Includes nfqws2 binary, Lua scripts, and firewall scripts.
+
