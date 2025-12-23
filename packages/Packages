@@ -146,8 +146,8 @@ Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 71680
 Filename: luci-app-zapret2_0.7.5-r22_all.ipk
-Size: 15214
-SHA256sum: a5467f5024a5f26c69a1ebdf70a9b6e987bb9b80f4f880d451e632a058fa21aa
+Size: 15221
+SHA256sum: 46dd2ecfa04f5cd72ee3d37f2509495a1c7d10b0293dbcc37500fb0a19df869a
 Description:  Web interface for managing zapret2 DPI bypass tool
 
 Package: luci-i18n-zapret2-ru
