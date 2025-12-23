@@ -181,3 +181,20 @@ Size: 58635
 SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
+Package: zapret2
+Version: 0.7.5-r24
+Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
+Source: feeds/base/zapret2
+SourceName: zapret2
+Section: net
+SourceDateEpoch: 1760891865
+Maintainer: Routerich (https://t.me/routerich)
+Architecture: x86_64
+Installed-Size: 880640
+Filename: zapret2_0.7.5-r24_x86_64.ipk
+Size: 472740
+SHA256sum: a8cc3dcd0576bd9d6f1d89a51b160178fcfc8af5709ff5b504612084b94b0136
+Description:  zapret2 is a DPI bypass tool using nfqws2.
+ This is a C rewrite with zeroblock-style management.
+ Includes nfqws2 binary, Lua scripts, and firewall scripts.
+
