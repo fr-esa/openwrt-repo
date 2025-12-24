@@ -150,22 +150,6 @@ Size: 17620
 SHA256sum: 1d389393a95cdf9843f4e7ea12d0036c8ccbd7f61bbbfeabaeb391b2132dc60d
 Description:  Web interface for managing zapret2 DPI bypass tool
 
-Package: luci-i18n-zapret2-ru
-Version: 0.251224.60399
-Depends: libc, luci-app-zapret2
-Source: feeds/base/luci-app-zapret2
-SourceName: luci-app-zapret2
-License: MIT
-Section: luci
-SourceDateEpoch: 1760891865
-Maintainer: Routerich (https://t.me/routerich)
-Architecture: all
-Installed-Size: 20480
-Filename: luci-i18n-zapret2-ru_0.251224.60399_all.ipk
-Size: 5328
-SHA256sum: c83b2f192cad6e02db4e13320860a5141c9c57547e37edb5ac42f5aa4ead06d9
-Description:  Translation for luci-app-zapret2 - Русский (Russian)
-
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
