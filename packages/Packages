@@ -150,6 +150,23 @@ Size: 18184
 SHA256sum: 63364b9faa215c396d80283ca43b1b07287ebf0ae7b0b5240606b3de56cacf69
 Description:  Web interface for managing zapret2 DPI bypass tool
 
+Package: luci-app-zapret2
+Version: 0.8-r8
+Depends: libc, luci-base, zapret2
+Source: feeds/base/luci-app-zapret2
+SourceName: luci-app-zapret2
+License: MIT
+Section: luci
+SourceDateEpoch: 1760891865
+URL: https://github.com/openwrt/luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 81920
+Filename: luci-app-zapret2_0.8-r8_all.ipk
+Size: 16673
+SHA256sum: ca0208d7e1dc5567b5002cf2e307efa44e224431fc731b49f5f28fd29f649901
+Description:  Web interface for managing zapret2 DPI bypass tool
+
 Package: luci-i18n-zapret2-ru
 Version: 0.251230.24936
 Depends: libc, luci-app-zapret2
@@ -227,6 +244,23 @@ Installed-Size: 931840
 Filename: zapret2_0.8-r1_x86_64.ipk
 Size: 483462
 SHA256sum: d99e05a386994ba4f1b2ea3495955f43fe355353f6e797d777ec3fab262d8af4
+Description:  zapret2 is a DPI bypass tool using nfqws2.
+ This is a C rewrite with zeroblock-style management.
+ Includes nfqws2 binary, Lua scripts, and firewall scripts.
+
+Package: zapret2
+Version: 0.8-r8
+Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
+Source: feeds/base/zapret2
+SourceName: zapret2
+Section: net
+SourceDateEpoch: 1760891865
+Maintainer: Routerich (https://t.me/routerich)
+Architecture: x86_64
+Installed-Size: 931840
+Filename: zapret2_0.8-r8_x86_64.ipk
+Size: 483462
+SHA256sum: dbf1009e6d2c6589675fb1ad39271645a2d77eb4d73764db0bba79dafaca48d9
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
