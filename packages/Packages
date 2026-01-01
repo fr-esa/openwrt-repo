@@ -151,7 +151,7 @@ SHA256sum: efbb1f57a103d36d61bed04c643a04319f97951fc18e16cacfe11708a0cf5eac
 Description:  Web interface for managing zapret2 DPI bypass tool
 
 Package: luci-i18n-zapret2-ru
-Version: 0.260101.37332
+Version: 0.260101.41867
 Depends: libc, luci-app-zapret2
 Source: feeds/base/luci-app-zapret2
 SourceName: luci-app-zapret2
@@ -161,9 +161,9 @@ SourceDateEpoch: 1760891865
 Maintainer: Routerich (https://t.me/routerich)
 Architecture: all
 Installed-Size: 30720
-Filename: luci-i18n-zapret2-ru_0.260101.37332_all.ipk
-Size: 6870
-SHA256sum: 3284c2c63d99896a0b90133becbaa2910ea2b8438362c264d4d4d396141ba07c
+Filename: luci-i18n-zapret2-ru_0.260101.41867_all.ipk
+Size: 6865
+SHA256sum: 96e4052e56e685b36c5acd07a2ce9a80b130d382156680e37fdd974aa8ab85b3
 Description:  Translation for luci-app-zapret2 - Русский (Russian)
 
 Package: luci-proto-amneziawg
@@ -225,8 +225,8 @@ Maintainer: Routerich (https://t.me/routerich)
 Architecture: x86_64
 Installed-Size: 931840
 Filename: zapret2_0.8-r14_x86_64.ipk
-Size: 483486
-SHA256sum: 49988f4eb385d324d35cafe4bdf22c8d723868519a9a34f4b26ebb13241af77a
+Size: 483514
+SHA256sum: 7847164665fd93e52b94e69c8683d5e0ca33700a5a0bbbb2af77f2489d3f6af8
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
