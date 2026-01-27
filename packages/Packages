@@ -133,22 +133,6 @@ Size: 2496
 SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
-Package: luci-app-zapret2
-Version: 0.8.4-r3
-Depends: libc, luci-base, zapret2
-Source: /home/fresa/zapret2wrt/luci-app-zapret2
-SourceName: luci-app-zapret2
-Section: luci
-SourceDateEpoch: 1769082429
-Maintainer: RouteRich (https://t.me/routerich)
-Architecture: all
-Installed-Size: 122880
-Filename: luci-app-zapret2_0.8.4-r3_all.ipk
-Size: 25368
-SHA256sum: 990ccbffe346629702e6a65893bec4607999af8afcab64806a6709547291fc15
-Description:  Web interface for managing zapret2 DPI bypass tool.
- Provides configuration UI for strategies, lists, scripts, and blockcheck.
-
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
@@ -198,18 +182,35 @@ SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
 Package: zapret2
-Version: 0.8.4-r3
+Version: 0.8.6-r1
 Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
-Source: /home/fresa/zapret2wrt/zapret2
+Source: feeds/base/zapret2
 SourceName: zapret2
 Section: net
-SourceDateEpoch: 1768481893
+SourceDateEpoch: 1760891865
+Maintainer: Routerich (https://t.me/routerich)
+Architecture: aarch64_cortex-a53
+Installed-Size: 1013760
+Filename: zapret2_0.8.6-r1_aarch64_cortex-a53.ipk
+Size: 494716
+SHA256sum: 31338f4237bef5db756c353aca10c3afdd8dce92938e30e8f13ce58acc38d5a3
+Description:  zapret2 is a DPI bypass tool using nfqws2.
+ This is a C rewrite with zeroblock-style management.
+ Includes nfqws2 binary, Lua scripts, and firewall scripts.
+
+Package: zapret2
+Version: 0.8.6-r1
+Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
+Source: feeds/base/zapret2
+SourceName: zapret2
+Section: net
+SourceDateEpoch: 1760891865
 Maintainer: Routerich (https://t.me/routerich)
 Architecture: x86_64
 Installed-Size: 972800
-Filename: zapret2_0.8.4-r3_x86_64.ipk
-Size: 496124
-SHA256sum: 3b04baf3f37d5271f1b8616bd15b71da5da392b524211d3fd95c2c748f80b07a
+Filename: zapret2_0.8.6-r1_x86_64.ipk
+Size: 497289
+SHA256sum: a6ba04c42e728216d06d32774df3e5a461e6235261c6542a1bcfc2855604128f
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
