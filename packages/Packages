@@ -133,6 +133,22 @@ Size: 2496
 SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
+Package: luci-app-zapret2
+Version: 0.9.0.4-r1
+Depends: libc, luci-base, zapret2
+Source: feeds/base/luci-app-zapret2
+SourceName: luci-app-zapret2
+Section: luci
+SourceDateEpoch: 1760891865
+Maintainer: RouteRich (https://t.me/routerich)
+Architecture: all
+Installed-Size: 122880
+Filename: luci-app-zapret2_0.9.0.4-r1_all.ipk
+Size: 25508
+SHA256sum: c55543dcc6f3a27145165a6d24cbe21022787f48f282314bf4eeaf7d93567182
+Description:  Web interface for managing zapret2 DPI bypass tool.
+ Provides configuration UI for strategies, lists, scripts, and blockcheck.
+
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
