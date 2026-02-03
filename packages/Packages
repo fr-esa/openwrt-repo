@@ -133,21 +133,23 @@ Size: 2496
 SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
-Package: luci-app-zapret2
-Version: 0.9.0-r2
-Depends: libc, luci-base, zapret2
-Source: feeds/base/luci-app-zapret2
-SourceName: luci-app-zapret2
+Package: luci-app-zeroblock
+Version: 0.6.1-r127
+Depends: libc, luci-base, zeroblock
+Source: /home/fresa/zeroblock/luci-app-zeroblock
+SourceName: luci-app-zeroblock
+License: MIT
 Section: luci
-SourceDateEpoch: 1760891865
-Maintainer: RouteRich (https://t.me/routerich)
+SourceDateEpoch: 1770113014
+Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
-Installed-Size: 122880
-Filename: luci-app-zapret2_0.9.0-r2_all.ipk
-Size: 25978
-SHA256sum: 7e7778977f6795a7b859a5c55613c31a6e03ef6479dcd059ac6d1190139a603c
-Description:  Web interface for managing zapret2 DPI bypass tool.
- Provides configuration UI for strategies, lists, scripts, and blockcheck.
+Installed-Size: 307200
+Filename: luci-app-zeroblock_0.6.1-r127_all.ipk
+Size: 62136
+SHA256sum: 25d62f6e0151686b548b53bd025bc050d74f319fad81a9c126d2a1457620e0d6
+Description:  Web interface for ZeroBlock transparent proxy manager.
+ Supports sing-box with VLESS, VMess, Trojan, Shadowsocks, Hysteria2, TUIC,
+ and WireGuard protocols. Includes community domain lists management.
 
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
@@ -197,20 +199,57 @@ Size: 58635
 SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
-Package: zapret2
-Version: 0.9.0-r2
-Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
-Source: feeds/base/zapret2
-SourceName: zapret2
+Package: zeroblock
+Version: 0.6.1-r127
+Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
+Source: /home/fresa/zeroblock/zeroblock
+SourceName: zeroblock
+License: MIT
 Section: net
-SourceDateEpoch: 1760891865
-Maintainer: Routerich (https://t.me/routerich)
+SourceDateEpoch: 1770117390
+URL: https://git.routerich.ru/routerich/zeroblock
+Maintainer: ZeroBlock <support@routerich.ru>
+Architecture: aarch64_cortex-a53
+Installed-Size: 481280
+Filename: zeroblock_0.6.1-r127_aarch64_cortex-a53.ipk
+Size: 187753
+SHA256sum: cd520514e34e36e2916a1a6316d0d04253584b91fb6351f4f4048c1464b6cc0d
+Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
+ as the proxy engine. It supports multiple protocols including VLESS,
+ VMess, Trojan, Shadowsocks, Hysteria2, TUIC, and WireGuard.
+ 
+ Features:
+ - Modern sing-box + xray-core engine with multiple protocols
+ - Community domain lists (YouTube, TikTok, Telegram, etc.)
+ - FakeIP DNS for fast resolution
+ - nftables-based transparent proxy
+ - LuCI web interface (separate package)
+ - Clash API dashboard support
+
+Package: zeroblock
+Version: 0.6.1-r127
+Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
+Source: /home/fresa/zeroblock/zeroblock
+SourceName: zeroblock
+License: MIT
+Section: net
+SourceDateEpoch: 1770117390
+URL: https://git.routerich.ru/routerich/zeroblock
+Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
-Installed-Size: 1013760
-Filename: zapret2_0.9.0-r2_x86_64.ipk
-Size: 510634
-SHA256sum: 79c8e7cfe9ac95f6739501632bf5745890bf80af60ca73b9d6e96a03aa9516d8
-Description:  zapret2 is a DPI bypass tool using nfqws2.
- This is a C rewrite with zeroblock-style management.
- Includes nfqws2 binary, Lua scripts, and firewall scripts.
+Installed-Size: 409600
+Filename: zeroblock_0.6.1-r127_x86_64.ipk
+Size: 169093
+SHA256sum: 78197a6b52f297f67d778e78d9ce59faa54d2d40d4cef6ba85d92831162c7563
+Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
+ as the proxy engine. It supports multiple protocols including VLESS,
+ VMess, Trojan, Shadowsocks, Hysteria2, TUIC, and WireGuard.
+ 
+ Features:
+ - Modern sing-box + xray-core engine with multiple protocols
+ - Community domain lists (YouTube, TikTok, Telegram, etc.)
+ - FakeIP DNS for fast resolution
+ - nftables-based transparent proxy
+ - LuCI web interface (separate package)
+ - Clash API dashboard support
 
