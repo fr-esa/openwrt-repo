@@ -134,7 +134,7 @@ SHA256sum: 93af8a832223989b01f0cf503c01793999ad672d2339e9c5efd58d69b1dd3a72
 Description:  This package contains LuCI configuration pages for openwrt-vlmcsd.
 
 Package: luci-app-zapret2
-Version: 0.9.0-r1
+Version: 0.9.0-r2
 Depends: libc, luci-base, zapret2
 Source: feeds/base/luci-app-zapret2
 SourceName: luci-app-zapret2
@@ -143,9 +143,9 @@ SourceDateEpoch: 1760891865
 Maintainer: RouteRich (https://t.me/routerich)
 Architecture: all
 Installed-Size: 122880
-Filename: luci-app-zapret2_0.9.0-r1_all.ipk
-Size: 25902
-SHA256sum: 21cfb1676a9dcb57f82c43624205cb9fb887463d897c6721e383ac2d6293d448
+Filename: luci-app-zapret2_0.9.0-r2_all.ipk
+Size: 25978
+SHA256sum: 7e7778977f6795a7b859a5c55613c31a6e03ef6479dcd059ac6d1190139a603c
 Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
@@ -198,7 +198,7 @@ SHA256sum: 6165d53cab957b27aa5fe164a7dbefc01e7fcc5b99440cea00e132ed8080b896
 Description:  vlmcsd is a KMS Emulator in C.
 
 Package: zapret2
-Version: 0.9.0-r1
+Version: 0.9.0-r2
 Depends: libc, libuci20250120, nftables, kmod-nft-queue, kmod-nfnetlink-queue, gzip, curl, ncat
 Source: feeds/base/zapret2
 SourceName: zapret2
@@ -207,9 +207,9 @@ SourceDateEpoch: 1760891865
 Maintainer: Routerich (https://t.me/routerich)
 Architecture: x86_64
 Installed-Size: 1013760
-Filename: zapret2_0.9.0-r1_x86_64.ipk
-Size: 510619
-SHA256sum: 5dd62a1d17597900e74c574ae384a32da8a815a94a7a2a99fb74097397ba4c3b
+Filename: zapret2_0.9.0-r2_x86_64.ipk
+Size: 510634
+SHA256sum: 79c8e7cfe9ac95f6739501632bf5745890bf80af60ca73b9d6e96a03aa9516d8
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
