@@ -144,8 +144,8 @@ Maintainer: RouteRich (https://t.me/routerich)
 Architecture: all
 Installed-Size: 122880
 Filename: luci-app-zapret2_0.9.0.1-r1_all.ipk
-Size: 25889
-SHA256sum: b3d3468f4a85ebc09b15a6c2c52dddd889d31f47084fdd6799b0f62cda0cc0d7
+Size: 25208
+SHA256sum: b36bd7472dc38517a7af7710b2bd61f91d864c7f2335d98aba4d84f8d10ebc36
 Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
