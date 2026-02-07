@@ -205,11 +205,11 @@ SourceName: zapret2
 Section: net
 SourceDateEpoch: 1760891865
 Maintainer: Routerich (https://t.me/routerich)
-Architecture: aarch64_cortex-a53
-Installed-Size: 1064960
-Filename: zapret2_0.9.2-r2_aarch64_cortex-a53.ipk
-Size: 513179
-SHA256sum: dfb072975e8e5ecbf5106b74826ddc6a113e568e96c7d9f64e8581ffa6e08d30
+Architecture: x86_64
+Installed-Size: 1034240
+Filename: zapret2_0.9.2-r2_x86_64.ipk
+Size: 516158
+SHA256sum: f3766ec2a9c3b9feb5c8e7bc83c48af0d99e90ae3f904c92bc700f07106298bd
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
