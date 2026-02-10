@@ -149,24 +149,6 @@ SHA256sum: d1763411fd2148dec3da89a6d9c497c726c5558557ce9834f3e43ad3ebc606a5
 Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
-Package: luci-app-zeroblock
-Version: 0.6.2-r56
-Depends: libc, luci-base, zeroblock
-Source: /home/fresa/zeroblock/luci-app-zeroblock
-SourceName: luci-app-zeroblock
-License: MIT
-Section: luci
-SourceDateEpoch: 1770753217
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: all
-Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.2-r56_all.ipk
-Size: 67948
-SHA256sum: 8d7b2a9d3fffb9abca8c40065cbabc52d53cf4b4d377e3ad110b384a297425ad
-Description:  Web interface for ZeroBlock transparent proxy manager.
- Supports sing-box with VLESS, VMess, Trojan, Shadowsocks, Hysteria2, TUIC,
- and WireGuard protocols. Includes community domain lists management.
-
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
