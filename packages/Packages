@@ -213,30 +213,3 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
-Package: zeroblock
-Version: 0.6.2-r56
-Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
-Source: /home/fresa/zeroblock/zeroblock
-SourceName: zeroblock
-License: MIT
-Section: net
-SourceDateEpoch: 1770752717
-URL: https://git.routerich.ru/routerich/zeroblock
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: x86_64
-Installed-Size: 450560
-Filename: zeroblock_0.6.2-r56_x86_64.ipk
-Size: 182875
-SHA256sum: c9adb0805b96747df0a3cafceb78258e095d20ec6182fceeabdce55d225b781b
-Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
- as the proxy engine. It supports multiple protocols including VLESS,
- VMess, Trojan, Shadowsocks, Hysteria2, TUIC, and WireGuard.
- 
- Features:
- - Modern sing-box + xray-core engine with multiple protocols
- - Community domain lists (YouTube, TikTok, Telegram, etc.)
- - FakeIP DNS for fast resolution
- - nftables-based transparent proxy
- - LuCI web interface (separate package)
- - Clash API dashboard support
-
