@@ -241,11 +241,11 @@ Section: net
 SourceDateEpoch: 1770759439
 URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: aarch64_cortex-a53
-Installed-Size: 481280
-Filename: zeroblock_0.6.2-r57_aarch64_cortex-a53.ipk
-Size: 202479
-SHA256sum: 7df0bc4845d10472fda755d301fa5c44432b28947defe73462b905e5e7033e23
+Architecture: x86_64
+Installed-Size: 450560
+Filename: zeroblock_0.6.2-r57_x86_64.ipk
+Size: 182868
+SHA256sum: c9ba94004ea02603dc561693f1de511a3f05cf4e434f31acd7aa70294f3f39aa
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  as the proxy engine. It supports multiple protocols including VLESS,
  VMess, Trojan, Shadowsocks, Hysteria2, TUIC, and WireGuard.
