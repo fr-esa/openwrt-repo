@@ -150,19 +150,19 @@ Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
 Package: luci-app-zeroblock
-Version: 0.6.2-r56
+Version: 0.6.2-r57
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
 License: MIT
 Section: luci
-SourceDateEpoch: 1770753217
+SourceDateEpoch: 1770759439
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
 Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.2-r56_all.ipk
-Size: 67948
-SHA256sum: 8d7b2a9d3fffb9abca8c40065cbabc52d53cf4b4d377e3ad110b384a297425ad
+Filename: luci-app-zeroblock_0.6.2-r57_all.ipk
+Size: 67980
+SHA256sum: 3521eb63e2c5fbaf2392b3914c0176bcecab478ce32979668eeec74538bee473
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box with VLESS, VMess, Trojan, Shadowsocks, Hysteria2, TUIC,
  and WireGuard protocols. Includes community domain lists management.
@@ -232,20 +232,20 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
 Package: zeroblock
-Version: 0.6.2-r56
+Version: 0.6.2-r57
 Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
 License: MIT
 Section: net
-SourceDateEpoch: 1770752717
+SourceDateEpoch: 1770759439
 URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: x86_64
-Installed-Size: 450560
-Filename: zeroblock_0.6.2-r56_x86_64.ipk
-Size: 182875
-SHA256sum: c9adb0805b96747df0a3cafceb78258e095d20ec6182fceeabdce55d225b781b
+Architecture: aarch64_cortex-a53
+Installed-Size: 481280
+Filename: zeroblock_0.6.2-r57_aarch64_cortex-a53.ipk
+Size: 202479
+SHA256sum: 7df0bc4845d10472fda755d301fa5c44432b28947defe73462b905e5e7033e23
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  as the proxy engine. It supports multiple protocols including VLESS,
  VMess, Trojan, Shadowsocks, Hysteria2, TUIC, and WireGuard.
