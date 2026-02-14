@@ -168,7 +168,7 @@ Description:  Web interface for ZeroBlock transparent proxy manager.
  and WireGuard protocols. Includes community domain lists management.
 
 Package: luci-app-zeroblock
-Version: 0.6.2-r75
+Version: 0.6.2-r76
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
@@ -178,9 +178,9 @@ SourceDateEpoch: 1770990809
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
 Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.2-r75_all.ipk
-Size: 68799
-SHA256sum: 1aa09049ed6c6f6a2525b6ff5a8bd4248dd14e729a6bdc6dfc237333d24af70f
+Filename: luci-app-zeroblock_0.6.2-r76_all.ipk
+Size: 68801
+SHA256sum: 680dca185100470ebd4fbdb9e00825192930aff6b16287af22a9f6df895ce448
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
@@ -284,7 +284,7 @@ Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sin
  - Clash API dashboard
 
 Package: zeroblock
-Version: 0.6.2-r75
+Version: 0.6.2-r76
 Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
@@ -295,9 +295,9 @@ URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
 Installed-Size: 460800
-Filename: zeroblock_0.6.2-r75_x86_64.ipk
-Size: 187151
-SHA256sum: 0c4a511485bca6345484e2d5d446e0c5698fdf4d3f4f7db6cea08df7bda3a360
+Filename: zeroblock_0.6.2-r76_x86_64.ipk
+Size: 187272
+SHA256sum: adb280129079a71b2d07e8032493dff8e9855a47c69de58dac950a9652980fc3
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  and xray-core as proxy engines.
  
