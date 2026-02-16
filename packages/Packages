@@ -150,7 +150,7 @@ Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
 Package: luci-app-zeroblock
-Version: 0.6.2-r87
+Version: 0.6.2-r88
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
@@ -160,9 +160,9 @@ SourceDateEpoch: 1771110589
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
 Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.2-r87_all.ipk
-Size: 68791
-SHA256sum: 0e4a287bc1ad81d1e7e3ceb077478659e22efaf5b3352a7d321beca0313db9d5
+Filename: luci-app-zeroblock_0.6.2-r88_all.ipk
+Size: 68801
+SHA256sum: f5b235ca3762e5ff5565c1fcfb100208b8f9782340b0cfc6e24abd69b1e46587
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
@@ -233,7 +233,7 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
 Package: zeroblock
-Version: 0.6.2-r87
+Version: 0.6.2-r88
 Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
@@ -244,9 +244,9 @@ URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
 Installed-Size: 460800
-Filename: zeroblock_0.6.2-r87_x86_64.ipk
-Size: 189006
-SHA256sum: 3f5e413dd9dbfe0f1fd8cd558e57e4c11361493e3496329f82b67ee6520107a1
+Filename: zeroblock_0.6.2-r88_x86_64.ipk
+Size: 189265
+SHA256sum: 611478ab5f1da1362dd8aea330dd8307404c55d4eacd57657e6ef5e7eb380e52
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  and xray-core as proxy engines.
  
