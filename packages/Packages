@@ -150,19 +150,19 @@ Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
 Package: luci-app-zeroblock
-Version: 0.6.2-r94
+Version: 0.6.4-r8
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
 License: MIT
 Section: luci
-SourceDateEpoch: 1771110589
+SourceDateEpoch: 1771327113
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
 Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.2-r94_all.ipk
-Size: 69101
-SHA256sum: 65845ceeab972be2ae411b9396f8ecf93d029022edd5112a4e4f82bc53e7d3be
+Filename: luci-app-zeroblock_0.6.4-r8_all.ipk
+Size: 69877
+SHA256sum: e2a845aba3cfc95776154d2fdc8e7d87c712bf7872995265f90a5e5a6dec8490
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
@@ -233,24 +233,24 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
 Package: zeroblock
-Version: 0.6.2-r94
-Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, nftables-json, kmod-nft-tproxy, sing-box-tiny
+Version: 0.6.4-r8
+Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, libyaml, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
 License: MIT
 Section: net
-SourceDateEpoch: 1771187483
+SourceDateEpoch: 1771332233
 URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
-Installed-Size: 460800
-Filename: zeroblock_0.6.2-r94_x86_64.ipk
-Size: 189892
-SHA256sum: be7755eaa758afaa377c0665057385feb227f92258f76ddc16d41532be8ae66e
+Installed-Size: 471040
+Filename: zeroblock_0.6.4-r8_x86_64.ipk
+Size: 192968
+SHA256sum: af88a6b02ad782b3e0d40012660f878e0938af0e0db9ebbf01d2970ec94a6d3e
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  and xray-core as proxy engines.
  
- Protocols: VLESS, VMess, Trojan, Shadowsocks, Hysteria2, TUIC,
+ Protocols: VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS
  Transports: TCP, WebSocket, gRPC, HTTP/2, HTTP Upgrade, XHTTP (SplitHTTP)
  Security: TLS, Reality, XTLS
