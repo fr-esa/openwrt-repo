@@ -150,19 +150,19 @@ Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
 Package: luci-app-zeroblock
-Version: 0.6.4-r8
+Version: 0.6.4-r20
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
 License: MIT
 Section: luci
-SourceDateEpoch: 1771327113
+SourceDateEpoch: 1771506488
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
-Installed-Size: 337920
-Filename: luci-app-zeroblock_0.6.4-r8_all.ipk
-Size: 69877
-SHA256sum: e2a845aba3cfc95776154d2fdc8e7d87c712bf7872995265f90a5e5a6dec8490
+Installed-Size: 348160
+Filename: luci-app-zeroblock_0.6.4-r20_all.ipk
+Size: 70965
+SHA256sum: 1792b50bc41ff2b5de9931556b9b7b926cb8e435fb2eb52b60467673e0f495e1
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
@@ -233,20 +233,20 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
 Package: zeroblock
-Version: 0.6.4-r8
+Version: 0.6.4-r20
 Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, libyaml, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
 License: MIT
 Section: net
-SourceDateEpoch: 1771332233
+SourceDateEpoch: 1771506488
 URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
 Installed-Size: 471040
-Filename: zeroblock_0.6.4-r8_x86_64.ipk
-Size: 192968
-SHA256sum: af88a6b02ad782b3e0d40012660f878e0938af0e0db9ebbf01d2970ec94a6d3e
+Filename: zeroblock_0.6.4-r20_x86_64.ipk
+Size: 193786
+SHA256sum: efc9e78e46de93e61dbea6b0cedaf122b50c0aa9556cea03f0b89ab1f8597450
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  and xray-core as proxy engines.
  
