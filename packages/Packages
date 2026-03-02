@@ -150,7 +150,7 @@ Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
 Package: luci-app-zeroblock
-Version: 0.6.4-r105
+Version: 0.6.4-r107
 Depends: libc, luci-base, zeroblock
 Source: /home/fresa/zeroblock/luci-app-zeroblock
 SourceName: luci-app-zeroblock
@@ -159,10 +159,10 @@ Section: luci
 SourceDateEpoch: 1772446026
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
-Installed-Size: 368640
-Filename: luci-app-zeroblock_0.6.4-r105_all.ipk
-Size: 74888
-SHA256sum: 762e10c784e959920a12ea25a3f319bc11a1d17b9510e4b3efa879cec96ac2df
+Installed-Size: 358400
+Filename: luci-app-zeroblock_0.6.4-r107_all.ipk
+Size: 74641
+SHA256sum: 8692f8dde750225fac07ca194052fe399b4cf483b477e59ccfed1ede8c673078
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
@@ -233,20 +233,20 @@ Description:  zapret2 is a DPI bypass tool using nfqws2.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
 
 Package: zeroblock
-Version: 0.6.4-r105
+Version: 0.6.4-r107
 Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, libyaml, nftables-json, kmod-nft-tproxy, sing-box-tiny
 Source: /home/fresa/zeroblock/zeroblock
 SourceName: zeroblock
 License: MIT
 Section: net
-SourceDateEpoch: 1772449747
+SourceDateEpoch: 1772472001
 URL: https://git.routerich.ru/routerich/zeroblock
 Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: x86_64
 Installed-Size: 512000
-Filename: zeroblock_0.6.4-r105_x86_64.ipk
-Size: 210998
-SHA256sum: fc0ce43700123688530614d7af06fc07e16325c9cef6d8812472196f6ce93227
+Filename: zeroblock_0.6.4-r107_x86_64.ipk
+Size: 211067
+SHA256sum: b640d0a846072d63a51dd588ecd91fdc0b2482a92596dd549573def6403e544f
 Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
  and xray-core as proxy engines.
  
