@@ -149,25 +149,6 @@ SHA256sum: 4c0c8bb43ced705279a2ead0b68d384802f7edfd7957242e78ed01d18a6f2a6a
 Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
-Package: luci-app-zeroblock
-Version: 0.7.0-r1
-Depends: libc, luci-base, zeroblock
-Source: /home/fresa/zeroblock/luci-app-zeroblock
-SourceName: luci-app-zeroblock
-License: MIT
-Section: luci
-SourceDateEpoch: 1772562049
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: all
-Installed-Size: 368640
-Filename: luci-app-zeroblock_0.7.0-r1_all.ipk
-Size: 75952
-SHA256sum: 051bdaae443a8baa2b681e4a0b36ed9da24e44701eeda459638d2b29637335e7
-Description:  Web interface for ZeroBlock transparent proxy manager.
- Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
- TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
- URLTest auto-selection, community lists, schedule-based blocking.
-
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
@@ -231,39 +212,4 @@ SHA256sum: e3e38f9bdf3c6f8f9994bb4b70666c939edf51a74c658a85d262a7c1ca228dd7
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
-
-Package: zeroblock
-Version: 0.7.0-r1
-Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, libyaml, nftables-json, kmod-nft-tproxy, sing-box-tiny
-Source: /home/fresa/zeroblock/zeroblock
-SourceName: zeroblock
-License: MIT
-Section: net
-SourceDateEpoch: 1772562049
-URL: https://git.routerich.ru/routerich/zeroblock
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: x86_64
-Installed-Size: 532480
-Filename: zeroblock_0.7.0-r1_x86_64.ipk
-Size: 217994
-SHA256sum: 1cea84d7ddf7b212896ac441aae6a4a067cc02e92fbb2cb813da6aa475c3f27a
-Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
- and xray-core as proxy engines.
- 
- Protocols: VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
- WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS
- Transports: TCP, WebSocket, gRPC, HTTP/2, HTTP Upgrade, XHTTP (SplitHTTP)
- Security: TLS, Reality, XTLS
- 
- Features:
- - Dual engine: sing-box + xray-core with automatic fallback
- - URLTest auto-selection across multiple proxies
- - Community domain/subnet lists with auto-update (API v1/v2)
- - FakeIP DNS for transparent routing
- - nftables-based traffic redirection
- - Subscription URL import with auto-parsing
- - Opera Proxy, zapret2, TrustTunnel integration
- - Schedule-based blocking (time ranges, days of week)
- - LuCI web interface (separate package)
- - Clash API dashboard
 
