@@ -161,8 +161,8 @@ Maintainer: ZeroBlock <support@routerich.ru>
 Architecture: all
 Installed-Size: 368640
 Filename: luci-app-zeroblock_0.7.0-r2_all.ipk
-Size: 75957
-SHA256sum: 2d66e27064aa9f929f351adc8d97a6805b3a71c7989ae60c67fc7b6dba36d843
+Size: 76006
+SHA256sum: 7e8f98887b2200cca183ca8d344797588e93d2cfe11adcc3af4d58934952f223
 Description:  Web interface for ZeroBlock transparent proxy manager.
  Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
  TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
