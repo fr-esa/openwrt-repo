@@ -149,25 +149,6 @@ SHA256sum: 97f524e0087dd6147581de9ec2e5bc6d9a84b4d49e87d6d99e0679c6ec33f6d2
 Description:  Web interface for managing zapret2 DPI bypass tool.
  Provides configuration UI for strategies, lists, scripts, and blockcheck.
 
-Package: luci-app-zeroblock
-Version: 0.7.0-r3
-Depends: libc, luci-base, zeroblock
-Source: /home/fresa/zeroblock/luci-app-zeroblock
-SourceName: luci-app-zeroblock
-License: MIT
-Section: luci
-SourceDateEpoch: 1772628964
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: all
-Installed-Size: 368640
-Filename: luci-app-zeroblock_0.7.0-r3_all.ipk
-Size: 76001
-SHA256sum: 7a8e63e65e95e240c856932a75f61d56068f4e9da51f55a0119bed9f63749d47
-Description:  Web interface for ZeroBlock transparent proxy manager.
- Supports sing-box/xray with VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
- TUIC, WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS protocols.
- URLTest auto-selection, community lists, schedule-based blocking.
-
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
 Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
@@ -231,39 +212,4 @@ SHA256sum: af8a2a9f78e35fed82c0967850047a2258e6264f5ff1725a0d22a5a31d35d8f4
 Description:  zapret2 is a DPI bypass tool using nfqws2.
  This is a C rewrite with zeroblock-style management.
  Includes nfqws2 binary, Lua scripts, and firewall scripts.
-
-Package: zeroblock
-Version: 0.7.0-r3
-Depends: libc, libuci20250120, libubus20250102, libjson-c5, libcurl4, libmbedtls21, libmnl0, libyaml, nftables-json, kmod-nft-tproxy, sing-box-tiny, conntrack
-Source: /home/fresa/zeroblock/zeroblock
-SourceName: zeroblock
-License: MIT
-Section: net
-SourceDateEpoch: 1772656493
-URL: https://git.routerich.ru/routerich/zeroblock
-Maintainer: ZeroBlock <support@routerich.ru>
-Architecture: x86_64
-Installed-Size: 532480
-Filename: zeroblock_0.7.0-r3_x86_64.ipk
-Size: 220081
-SHA256sum: 34e211c8481425843fc9ad3cd33f0a9d8e2d5e0501fedcc27e8cc86783adc73e
-Description:  ZeroBlock is a transparent proxy manager for OpenWrt that uses sing-box
- and xray-core as proxy engines.
- 
- Protocols: VLESS, VMess, Trojan, Shadowsocks, Hysteria2,
- WireGuard, AmneziaWG, SOCKS4/5, HTTP/HTTPS
- Transports: TCP, WebSocket, gRPC, HTTP/2, HTTP Upgrade, XHTTP (SplitHTTP)
- Security: TLS, Reality, XTLS
- 
- Features:
- - Dual engine: sing-box + xray-core with automatic fallback
- - URLTest auto-selection across multiple proxies
- - Community domain/subnet lists with auto-update (API v1/v2)
- - FakeIP DNS for transparent routing
- - nftables-based traffic redirection
- - Subscription URL import with auto-parsing
- - Opera Proxy, zapret2, TrustTunnel integration
- - Schedule-based blocking (time ranges, days of week)
- - LuCI web interface (separate package)
- - Clash API dashboard
 
