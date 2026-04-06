@@ -1,7 +1,7 @@
 === Generating packages.adb ===
 Index has 13 packages (of which 13 are new)
 === Done ===
--rw-r--r-- 1 fresa fresa 3486 Apr  6 08:02 /share/openwrt_repo/packages/packages.adb
+-rw-r--r-- 1 fresa fresa 3482 Apr  6 08:10 /share/openwrt_repo/packages/packages.adb
 
 On router, add public key and repo:
   scp /share/openwrt_repo/keys/repo.key.pub root@router:/etc/apk/keys/
